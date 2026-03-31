@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:strikercoaching.com)",
+      "WebFetch(domain:ob-health.com)",
+      "WebSearch",
+      "WebFetch(domain:obhealth.carrd.co)",
+      "WebFetch(domain:www.dylanobrienfit.com)",
+      "WebFetch(domain:web.archive.org)",
+      "WebFetch(domain:api.builtwith.com)",
+      "WebFetch(domain:www.instagram.com)",
+      "WebFetch(domain:webcache.googleusercontent.com)",
+      "WebFetch(domain:hercules.app)",
+      "WebFetch(domain:perform.framer.website)",
+      "WebFetch(domain:fitcoach-wbs.framer.website)"
+    ]
+  }
+}
