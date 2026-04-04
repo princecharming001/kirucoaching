@@ -10,14 +10,16 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     :root {
-      --bg: #0a0a0a;
-      --card: #121212;
-      --accent: #FF6B2B;
-      --accent2: #4361EE;
-      --white: #fff;
-      --muted: #888;
-      --line: rgba(255,255,255,0.1);
+      --bg: #f5f0e8;
+      --card: #ede8dc;
+      --accent: #1a2e4a;
+      --accent2: #243d60;
+      --white: #1a1a1a;
+      --muted: #6b6459;
+      --line: rgba(26,46,74,0.12);
       --max: 560px;
+      --beige-warm: #e8dfc9;
+      --text-on-dark: #f5f0e8;
     }
     body {
       min-height: 100vh;
@@ -27,12 +29,13 @@
       font-size: 16px;
       line-height: 1.55;
     }
+    ::selection { background: rgba(26,46,74,0.15); }
     a { color: var(--accent); }
     .top {
       position: sticky; top: 0; z-index: 10;
-      background: rgba(10,10,10,0.92);
+      background: rgba(245,240,232,0.94);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255,107,43,0.15);
+      border-bottom: 1px solid rgba(26,46,74,0.1);
       padding: 0.85rem 1.25rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     }
@@ -51,7 +54,7 @@
     }
     .progress {
       height: 4px;
-      background: var(--line);
+      background: rgba(26,46,74,0.1);
       border-radius: 2px;
       margin-bottom: 2rem;
       overflow: hidden;
@@ -67,6 +70,7 @@
       letter-spacing: 0.28em;
       text-transform: uppercase;
       color: var(--accent);
+      opacity: 0.7;
       margin-bottom: 0.5rem;
       font-family: 'Kanit', sans-serif;
     }
@@ -77,8 +81,9 @@
       line-height: 1.2;
       margin-bottom: 1.5rem;
       text-transform: uppercase;
+      color: var(--accent);
     }
-    .req { color: var(--accent); }
+    .req { color: rgba(26,46,74,0.5); }
     fieldset { border: none; }
     .choice {
       display: flex;
@@ -92,16 +97,17 @@
       gap: 0.75rem;
       padding: 1rem 1.1rem;
       border-radius: 0.85rem;
-      border: 2px solid var(--line);
+      border: 2px solid rgba(26,46,74,0.15);
       cursor: pointer;
       transition: border-color 0.2s, background 0.2s;
+      color: var(--white);
     }
-    .choice label:hover { border-color: rgba(255,107,43,0.45); }
+    .choice label:hover { border-color: rgba(26,46,74,0.4); background: rgba(26,46,74,0.04); }
     .choice input { accent-color: var(--accent); width: 1.1rem; height: 1.1rem; }
     .choice input:checked + span { font-weight: 600; }
     .choice label:has(input:checked) {
-      border-color: var(--accent2);
-      background: rgba(67, 97, 238, 0.08);
+      border-color: var(--accent);
+      background: rgba(26,46,74,0.07);
     }
     .invest-option {
       font-size: 0.92rem;
@@ -112,7 +118,8 @@
       width: 1.75rem;
       height: 1.75rem;
       border-radius: 0.35rem;
-      background: rgba(67, 97, 238, 0.25);
+      background: rgba(26,46,74,0.12);
+      color: var(--accent);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -131,8 +138,8 @@
     }
     .field input, .field textarea {
       width: 100%;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--line);
+      background: rgba(26,46,74,0.04);
+      border: 1px solid rgba(26,46,74,0.18);
       border-radius: 0.65rem;
       padding: 0.8rem 1rem;
       color: var(--white);
@@ -143,16 +150,19 @@
     }
     .field input:focus, .field textarea:focus {
       border-color: var(--accent);
-      background: rgba(255,107,43,0.06);
+      background: rgba(26,46,74,0.07);
+    }
+    .field input::placeholder, .field textarea::placeholder {
+      color: rgba(26,46,74,0.35);
     }
     .field textarea { min-height: 120px; resize: vertical; }
     .consent-box {
       font-size: 0.88rem;
-      color: rgba(255,255,255,0.85);
+      color: rgba(26,26,26,0.82);
       line-height: 1.55;
       padding: 1rem 1.1rem;
       border-radius: 0.85rem;
-      border: 1px solid var(--line);
+      border: 1px solid rgba(26,46,74,0.15);
       background: var(--card);
       margin-bottom: 1rem;
     }
@@ -186,20 +196,20 @@
     }
     .btn-primary {
       background: var(--accent);
-      color: var(--white);
+      color: var(--text-on-dark);
     }
     .btn-primary:hover:not(:disabled) {
       background: var(--accent2);
       transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(67, 97, 238, 0.35);
+      box-shadow: 0 8px 24px rgba(26,46,74,0.3);
     }
     .btn-ghost {
       background: transparent;
       color: var(--muted);
-      border: 1px solid var(--line);
+      border: 1px solid rgba(26,46,74,0.2);
     }
-    .btn-ghost:hover:not(:disabled) { color: var(--white); border-color: rgba(255,255,255,0.25); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .btn-ghost:hover:not(:disabled) { color: var(--accent); border-color: rgba(26,46,74,0.4); }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
     .panel { display: none; }
     .panel.active { display: block; animation: in 0.35s ease; }
     @keyframes in {
@@ -213,16 +223,16 @@
       font-size: 0.88rem;
       line-height: 1.45;
     }
-    .banner.warn { background: rgba(234, 179, 8, 0.12); border: 1px solid rgba(234, 179, 8, 0.35); color: #fde68a; }
-    .banner.err { background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); color: #fecaca; }
-    .banner.ok { background: rgba(34, 197, 94, 0.12); border: 1px solid rgba(34, 197, 94, 0.35); color: #bbf7d0; }
-    .kbd { font-size: 0.7rem; opacity: 0.7; margin-left: 0.35rem; }
+    .banner.warn { background: rgba(180,140,20,0.1); border: 1px solid rgba(180,140,20,0.3); color: #7a5e0a; }
+    .banner.err { background: rgba(180,40,40,0.08); border: 1px solid rgba(180,40,40,0.25); color: #8b1a1a; }
+    .banner.ok { background: rgba(30,130,80,0.1); border: 1px solid rgba(30,130,80,0.3); color: #1a6040; }
+    .kbd { font-size: 0.7rem; opacity: 0.5; margin-left: 0.35rem; }
   </style>
 </head>
 <body>
   <header class="top">
     <a class="home" href="index.html">KIRU</a>
-    <span class="hint">Application · ~6 min</span>
+    <span class="hint">Application · ~7 min</span>
   </header>
 
   <main class="wrap">
@@ -232,10 +242,10 @@
     <div id="msg-banner" class="banner" hidden></div>
 
     <div class="progress" aria-hidden="true"><div id="progress-fill" class="progress-fill"></div></div>
-    <p class="step-label" id="step-label">Step 1 of 6</p>
+    <p class="step-label" id="step-label">Step 1 of 7</p>
 
     <form id="app-form" novalidate>
-      <!-- Step 1 -->
+      <!-- Step 1 — age gate -->
       <div class="panel active" data-step="1" role="region" aria-labelledby="t1">
         <h1 id="t1">Are you over 23 years old?<span class="req">*</span></h1>
         <fieldset class="choice">
@@ -247,9 +257,24 @@
         </div>
       </div>
 
-      <!-- Step 2 -->
+      <!-- Step 2 — fitness goal -->
       <div class="panel" data-step="2" role="region" aria-labelledby="t2">
-        <h1 id="t2">Contact information<span class="req">*</span></h1>
+        <h1 id="t2">What’s your primary fitness goal?<span class="req">*</span></h1>
+        <fieldset class="choice">
+          <label><input type="radio" name="fitness_goal" value="fat_loss" required /> <span>Lose fat and get leaner</span></label>
+          <label><input type="radio" name="fitness_goal" value="muscle" /> <span>Build muscle and get stronger</span></label>
+          <label><input type="radio" name="fitness_goal" value="both" /> <span>Both — recomp / body transformation</span></label>
+          <label><input type="radio" name="fitness_goal" value="performance" /> <span>Improve overall health and performance</span></label>
+        </fieldset>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" data-back>Back</button>
+          <button type="button" class="btn btn-primary" data-next>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 3 — contact info -->
+      <div class="panel" data-step="3" role="region" aria-labelledby="t3">
+        <h1 id="t3">Contact information<span class="req">*</span></h1>
         <div class="field">
           <label for="first_name">First name<span class="req">*</span></label>
           <input id="first_name" name="first_name" type="text" autocomplete="given-name" required />
@@ -268,11 +293,11 @@
         </div>
       </div>
 
-      <!-- Step 3 -->
-      <div class="panel" data-step="3" role="region" aria-labelledby="t3">
-        <h1 id="t3">Tell us a bit about yourself<span class="req">*</span></h1>
+      <!-- Step 4 — about you -->
+      <div class="panel" data-step="4" role="region" aria-labelledby="t4">
+        <h1 id="t4">Tell us a bit about yourself<span class="req">*</span></h1>
         <div class="field">
-          <label for="location">Where are you currently located? (e.g. Texas, USA).<span class="req">*</span></label>
+          <label for="location">Where are you currently located? (e.g. Texas, USA)<span class="req">*</span></label>
           <input id="location" name="location" type="text" autocomplete="address-level1" required />
         </div>
         <div class="field">
@@ -289,9 +314,9 @@
         </div>
       </div>
 
-      <!-- Step 4 -->
-      <div class="panel" data-step="4" role="region" aria-labelledby="t4">
-        <h1 id="t4">Is there anything coming up that could prevent you from fully committing right now?<span class="req">*</span></h1>
+      <!-- Step 5 — commitment -->
+      <div class="panel" data-step="5" role="region" aria-labelledby="t5">
+        <h1 id="t5">Is there anything coming up that could prevent you from fully committing right now?<span class="req">*</span></h1>
         <div class="field">
           <label for="commitment_barriers">Your answer</label>
           <textarea id="commitment_barriers" name="commitment_barriers" required placeholder="Type your answer here..."></textarea>
@@ -302,9 +327,9 @@
         </div>
       </div>
 
-      <!-- Step 5 -->
-      <div class="panel" data-step="5" role="region" aria-labelledby="t5">
-        <h1 id="t5">This level of support requires a meaningful investment. Are you in a position to invest in yourself right now?<span class="req">*</span></h1>
+      <!-- Step 6 — investment -->
+      <div class="panel" data-step="6" role="region" aria-labelledby="t6">
+        <h1 id="t6">This level of support requires a meaningful investment. Are you in a position to invest in yourself right now?<span class="req">*</span></h1>
         <fieldset class="choice">
           <label>
             <input type="radio" name="investment_readiness" value="A" required />
@@ -328,10 +353,10 @@
         </div>
       </div>
 
-      <!-- Step 6 -->
-      <div class="panel" data-step="6" role="region" aria-labelledby="t6">
-        <h1 id="t6">Almost there — stay in touch<span class="req">*</span></h1>
-        <p style="margin-bottom:1rem;color:var(--muted);font-size:0.92rem;">Please share your phone number and Instagram so we can easily get in touch.</p>
+      <!-- Step 7 — contact + consent -->
+      <div class="panel" data-step="7" role="region" aria-labelledby="t9">
+        <h1 id="t9">Almost there — stay in touch<span class="req">*</span></h1>
+        <p style="margin-bottom:1rem;color:var(--muted);font-size:0.92rem;">Phone number for SMS updates from coaching.</p>
         <div class="field">
           <label for="phone">Phone number<span class="req">*</span></label>
           <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="+1 (555) 000-0000" required />
@@ -343,7 +368,7 @@
         <div class="consent-box">
           <label>
             <input id="consent" name="consent" type="checkbox" value="1" required />
-            <span>By submitting this form, you agree to receive messages from <strong>Kiru.r</strong> and confirm that you’ve answered the questions truthfully to the best of your ability. You understand that giving false information can prevent you from working with me in the future.</span>
+            <span>By submitting this form, you agree to receive messages from <strong>Kiru.r</strong> (including SMS where applicable) and confirm that you’ve answered the questions truthfully to the best of your ability. You understand that giving false information can prevent you from working with me in the future.</span>
           </label>
         </div>
         <div class="actions">
@@ -365,7 +390,7 @@
   <script src="js/config.js"></script>
   <script>
     (function () {
-      const TOTAL = 6;
+      const TOTAL = 7;
       const form = document.getElementById('app-form');
       const panels = Array.from(form.querySelectorAll('.panel[data-step]'));
       const progressFill = document.getElementById('progress-fill');
@@ -416,6 +441,7 @@
         if (!panel) return true;
         const inputs = panel.querySelectorAll('input, textarea, select');
         for (const el of inputs) {
+          if (el.type === 'hidden') continue;
           if (el.type === 'radio') {
             const name = el.name;
             const group = panel.querySelectorAll('input[name="' + name + '"]');
@@ -479,8 +505,10 @@
 
         const fd = new FormData(form);
         const over = fd.get('over_23');
+
         const payload = {
           over_23: over === 'yes',
+          fitness_goal: String(fd.get('fitness_goal') || '').trim(),
           first_name: String(fd.get('first_name') || '').trim(),
           last_name: String(fd.get('last_name') || '').trim(),
           email: String(fd.get('email') || '').trim(),
@@ -489,9 +517,12 @@
           occupation: String(fd.get('occupation') || '').trim(),
           commitment_barriers: String(fd.get('commitment_barriers') || '').trim(),
           investment_readiness: String(fd.get('investment_readiness') || '').trim(),
+          reminder_channel: 'sms',
+          sms_onboarding_skipped: false,
+          push_subscription: null,
           phone: String(fd.get('phone') || '').trim(),
           instagram: String(fd.get('instagram') || '').trim(),
-          consent: fd.get('consent') === '1'
+          consent: fd.get('consent') === '1',
         };
 
         if (!payload.over_23) {
@@ -500,6 +531,14 @@
         }
         if (!payload.consent) {
           showBanner('err', 'Please accept the consent statement to submit.');
+          return;
+        }
+        if (!payload.phone) {
+          showBanner('err', 'Please enter your phone number.');
+          return;
+        }
+        if (!payload.fitness_goal) {
+          showBanner('err', 'Please complete all steps, including your fitness goal.');
           return;
         }
 
@@ -524,8 +563,8 @@
             const t = await res.text();
             submitErr = new Error(t || res.statusText);
           }
-        } catch (e) {
-          submitErr = e;
+        } catch (err) {
+          submitErr = err;
         }
 
         submitBtn.disabled = false;
@@ -533,7 +572,7 @@
 
         if (submitErr) {
           console.error(submitErr);
-          showBanner('err', submitErr.message || 'Something went wrong. Check Supabase RLS, table name, and js/config.js.');
+          showBanner('err', submitErr.message || 'Something went wrong. Check Supabase RLS and that your table matches the expected columns.');
           return;
         }
 

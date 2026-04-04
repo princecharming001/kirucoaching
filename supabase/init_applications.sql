@@ -1,5 +1,8 @@
--- Full schema (same as init_applications.sql). Run in Supabase SQL Editor once.
--- Fresh project with no table: use init_applications.sql or this file.
+-- =============================================================================
+-- RUN THIS IN SUPABASE SQL EDITOR when `public.applications` does NOT exist yet.
+-- (If the table already exists but is missing reminder/push columns, use
+--  migration_reminders_push.sql instead.)
+-- =============================================================================
 
 create table if not exists public.applications (
   id uuid primary key default gen_random_uuid(),
@@ -35,11 +38,10 @@ create index if not exists applications_email_idx on public.applications (email)
 
 alter table public.applications enable row level security;
 
--- Anonymous inserts from the public site (anon key). Tighten if you add auth later.
+drop policy if exists "Allow anon insert applications" on public.applications;
+
 create policy "Allow anon insert applications"
   on public.applications
   for insert
   to anon
   with check (true);
-
--- No SELECT policy for anon: public rows are not readable via the API (insert still works with Prefer: return=minimal).
