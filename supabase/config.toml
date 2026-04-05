@@ -1,0 +1,5 @@
+# Supabase CLI — https://supabase.com/docs/guides/cli/config
+# Edge Function: notify-application (email Kiru on new applications)
+
+[functions.notify-application]
+verify_jwt = false

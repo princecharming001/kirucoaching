@@ -7,6 +7,7 @@ create table if not exists public.applications (
 
   over_23 boolean not null,
   fitness_goal text not null,
+  heard_about text not null default '',
   first_name text not null,
   last_name text not null,
   email text not null,

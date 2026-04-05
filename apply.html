@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Apply — Elevated Potential Coaching</title>
+  <title>Book a call — Elevated Potential Coaching</title>
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -39,12 +40,27 @@
       padding: 0.85rem 1.25rem;
       display: flex; align-items: center; justify-content: space-between; gap: 1rem;
     }
-    .top a.home {
-      font-family: 'Kanit', sans-serif;
-      font-weight: 900;
-      color: var(--accent);
+    .top a.brand-home {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
       text-decoration: none;
-      letter-spacing: 0.06em;
+      color: var(--accent);
+    }
+    .top a.brand-home img {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 0.35rem;
+      flex-shrink: 0;
+    }
+    .top a.brand-home .brand-text {
+      font-family: 'Kanit', sans-serif;
+      font-weight: 800;
+      font-size: 0.82rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.15;
+      max-width: 9.5rem;
     }
     .top .hint { font-size: 0.75rem; color: var(--muted); }
     .wrap {
@@ -231,8 +247,11 @@
 </head>
 <body>
   <header class="top">
-    <a class="home" href="index.html">KIRU</a>
-    <span class="hint">Application · ~7 min</span>
+    <a class="brand-home" href="index.html" aria-label="Elevated Potential Coaching — home">
+      <img src="assets/logo-mark.svg" width="32" height="32" alt="" role="presentation" decoding="async" />
+      <span class="brand-text">Elevated Potential Coaching</span>
+    </a>
+    <span class="hint">Book a call · ~8 min</span>
   </header>
 
   <main class="wrap">
@@ -242,24 +261,12 @@
     <div id="msg-banner" class="banner" hidden></div>
 
     <div class="progress" aria-hidden="true"><div id="progress-fill" class="progress-fill"></div></div>
-    <p class="step-label" id="step-label">Step 1 of 7</p>
+    <p class="step-label" id="step-label">Step 1 of 8</p>
 
     <form id="app-form" novalidate>
-      <!-- Step 1 — age gate -->
+      <!-- Step 1 — fitness goal -->
       <div class="panel active" data-step="1" role="region" aria-labelledby="t1">
-        <h1 id="t1">Are you over 23 years old?<span class="req">*</span></h1>
-        <fieldset class="choice">
-          <label><input type="radio" name="over_23" value="yes" required /> <span>Yes</span></label>
-          <label><input type="radio" name="over_23" value="no" /> <span>No</span></label>
-        </fieldset>
-        <div class="actions">
-          <button type="button" class="btn btn-primary" data-next>Continue</button>
-        </div>
-      </div>
-
-      <!-- Step 2 — fitness goal -->
-      <div class="panel" data-step="2" role="region" aria-labelledby="t2">
-        <h1 id="t2">What’s your primary fitness goal?<span class="req">*</span></h1>
+        <h1 id="t1">What’s your primary fitness goal?<span class="req">*</span></h1>
         <fieldset class="choice">
           <label><input type="radio" name="fitness_goal" value="fat_loss" required /> <span>Lose fat and get leaner</span></label>
           <label><input type="radio" name="fitness_goal" value="muscle" /> <span>Build muscle and get stronger</span></label>
@@ -267,14 +274,48 @@
           <label><input type="radio" name="fitness_goal" value="performance" /> <span>Improve overall health and performance</span></label>
         </fieldset>
         <div class="actions">
+          <button type="button" class="btn btn-primary" data-next>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 2 — age gate -->
+      <div class="panel" data-step="2" role="region" aria-labelledby="t2">
+        <h1 id="t2">Are you over 23 years old?<span class="req">*</span></h1>
+        <fieldset class="choice">
+          <label><input type="radio" name="over_23" value="yes" required /> <span>Yes</span></label>
+          <label><input type="radio" name="over_23" value="no" /> <span>No</span></label>
+        </fieldset>
+        <div class="actions">
           <button type="button" class="btn btn-ghost" data-back>Back</button>
           <button type="button" class="btn btn-primary" data-next>Continue</button>
         </div>
       </div>
 
-      <!-- Step 3 — contact info -->
+      <!-- Step 3 — how’d you hear about me -->
       <div class="panel" data-step="3" role="region" aria-labelledby="t3">
-        <h1 id="t3">Contact information<span class="req">*</span></h1>
+        <h1 id="t3">How’d you hear about me?<span class="req">*</span></h1>
+        <fieldset class="choice" id="heard-about-fieldset">
+          <label><input type="radio" name="heard_about" value="instagram" required /> <span>Instagram</span></label>
+          <label><input type="radio" name="heard_about" value="tiktok" /> <span>TikTok</span></label>
+          <label><input type="radio" name="heard_about" value="friend_referral" /> <span>Friend or referral</span></label>
+          <label><input type="radio" name="heard_about" value="google" /> <span>Google search</span></label>
+          <label><input type="radio" name="heard_about" value="youtube" /> <span>YouTube</span></label>
+          <label><input type="radio" name="heard_about" value="podcast" /> <span>Podcast</span></label>
+          <label><input type="radio" name="heard_about" value="other" /> <span>Other</span></label>
+        </fieldset>
+        <div class="field" id="heard-about-other-wrap" hidden>
+          <label for="heard_about_other">Tell us more<span class="req">*</span></label>
+          <input id="heard_about_other" name="heard_about_other" type="text" maxlength="240" placeholder="e.g. event name, account, or link" autocomplete="off" />
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-ghost" data-back>Back</button>
+          <button type="button" class="btn btn-primary" data-next>Continue</button>
+        </div>
+      </div>
+
+      <!-- Step 4 — contact info -->
+      <div class="panel" data-step="4" role="region" aria-labelledby="t4">
+        <h1 id="t4">Contact information<span class="req">*</span></h1>
         <div class="field">
           <label for="first_name">First name<span class="req">*</span></label>
           <input id="first_name" name="first_name" type="text" autocomplete="given-name" required />
@@ -293,9 +334,9 @@
         </div>
       </div>
 
-      <!-- Step 4 — about you -->
-      <div class="panel" data-step="4" role="region" aria-labelledby="t4">
-        <h1 id="t4">Tell us a bit about yourself<span class="req">*</span></h1>
+      <!-- Step 5 — about you -->
+      <div class="panel" data-step="5" role="region" aria-labelledby="t5">
+        <h1 id="t5">Tell us a bit about yourself<span class="req">*</span></h1>
         <div class="field">
           <label for="location">Where are you currently located? (e.g. Texas, USA)<span class="req">*</span></label>
           <input id="location" name="location" type="text" autocomplete="address-level1" required />
@@ -314,9 +355,9 @@
         </div>
       </div>
 
-      <!-- Step 5 — commitment -->
-      <div class="panel" data-step="5" role="region" aria-labelledby="t5">
-        <h1 id="t5">Is there anything coming up that could prevent you from fully committing right now?<span class="req">*</span></h1>
+      <!-- Step 6 — commitment -->
+      <div class="panel" data-step="6" role="region" aria-labelledby="t6">
+        <h1 id="t6">Is there anything coming up that could prevent you from fully committing right now?<span class="req">*</span></h1>
         <div class="field">
           <label for="commitment_barriers">Your answer</label>
           <textarea id="commitment_barriers" name="commitment_barriers" required placeholder="Type your answer here..."></textarea>
@@ -327,9 +368,9 @@
         </div>
       </div>
 
-      <!-- Step 6 — investment -->
-      <div class="panel" data-step="6" role="region" aria-labelledby="t6">
-        <h1 id="t6">This level of support requires a meaningful investment. Are you in a position to invest in yourself right now?<span class="req">*</span></h1>
+      <!-- Step 7 — investment -->
+      <div class="panel" data-step="7" role="region" aria-labelledby="t7">
+        <h1 id="t7">This level of support requires a meaningful investment. Are you in a position to invest in yourself right now?<span class="req">*</span></h1>
         <fieldset class="choice">
           <label>
             <input type="radio" name="investment_readiness" value="A" required />
@@ -353,9 +394,9 @@
         </div>
       </div>
 
-      <!-- Step 7 — contact + consent -->
-      <div class="panel" data-step="7" role="region" aria-labelledby="t9">
-        <h1 id="t9">Almost there — stay in touch<span class="req">*</span></h1>
+      <!-- Step 8 — contact + consent -->
+      <div class="panel" data-step="8" role="region" aria-labelledby="t8">
+        <h1 id="t8">Almost there — stay in touch<span class="req">*</span></h1>
         <p style="margin-bottom:1rem;color:var(--muted);font-size:0.92rem;">Phone number for SMS updates from coaching.</p>
         <div class="field">
           <label for="phone">Phone number<span class="req">*</span></label>
@@ -368,20 +409,20 @@
         <div class="consent-box">
           <label>
             <input id="consent" name="consent" type="checkbox" value="1" required />
-            <span>By submitting this form, you agree to receive messages from <strong>Kiru.r</strong> (including SMS where applicable) and confirm that you’ve answered the questions truthfully to the best of your ability. You understand that giving false information can prevent you from working with me in the future.</span>
+            <span>By completing this form to book a call, you agree to receive messages from <strong>Kiru Rasasegar</strong> at <strong>Elevated Potential Coaching</strong> (including SMS where applicable) and confirm that you’ve answered the questions truthfully to the best of your ability. You understand that giving false information can prevent you from working with me in the future.</span>
           </label>
         </div>
         <div class="actions">
           <button type="button" class="btn btn-ghost" data-back>Back</button>
-          <button type="submit" class="btn btn-primary" id="submit-btn">Submit</button>
+          <button type="submit" class="btn btn-primary" id="submit-btn">Book my call</button>
         </div>
-        <p class="kbd">Tip: Cmd + Enter also submits when this step is active.</p>
+        <p class="kbd">Tip: Cmd + Enter also sends this step when you’re on the last one.</p>
       </div>
 
       <!-- Success -->
       <div class="panel" data-step="done" role="status" aria-live="polite">
-        <h1>Application received</h1>
-        <p style="color:var(--muted);margin-bottom:1.5rem;">Thanks — we’ll review your answers and reach out soon.</p>
+        <h1>Call request received</h1>
+        <p style="color:var(--muted);margin-bottom:1.5rem;">Thanks — we’ll review what you sent and follow up to schedule your call.</p>
         <a class="btn btn-primary" href="index.html">Back to home</a>
       </div>
     </form>
@@ -390,7 +431,7 @@
   <script src="js/config.js"></script>
   <script>
     (function () {
-      const TOTAL = 7;
+      const TOTAL = 8;
       const form = document.getElementById('app-form');
       const panels = Array.from(form.querySelectorAll('.panel[data-step]'));
       const progressFill = document.getElementById('progress-fill');
@@ -398,6 +439,7 @@
       const configBanner = document.getElementById('config-banner');
       const msgBanner = document.getElementById('msg-banner');
       const submitBtn = document.getElementById('submit-btn');
+      const CALENDLY_BOOK_URL = 'https://calendly.com/kiru-rasasegar/45min';
 
       function hasSupabaseConfig() {
         const u = window.SUPABASE_URL && String(window.SUPABASE_URL).trim();
@@ -454,11 +496,26 @@
             return false;
           }
         }
-        if (n === 1) {
+        if (n === 2) {
           const no = panel.querySelector('input[name="over_23"][value="no"]');
           if (no && no.checked) {
-            showBanner('err', 'You must be over 23 to apply.');
+            showBanner('err', 'You must be over 23 to book a call.');
             return false;
+          }
+        }
+        if (n === 3) {
+          const other = panel.querySelector('input[name="heard_about"][value="other"]');
+          if (other && other.checked) {
+            const detail = panel.querySelector('#heard_about_other');
+            const ok = detail && String(detail.value || '').trim().length > 0;
+            if (detail) {
+              detail.setCustomValidity(ok ? '' : 'Please add a short note.');
+            }
+            if (!ok) {
+              if (detail) detail.reportValidity();
+              showBanner('err', 'Please tell us how you heard about Kiru.');
+              return false;
+            }
           }
         }
         return true;
@@ -481,6 +538,22 @@
         }
       }
 
+      (function syncHeardAboutOther() {
+        const wrap = document.getElementById('heard-about-other-wrap');
+        const otherInput = document.getElementById('heard_about_other');
+        function update() {
+          const other = form.querySelector('input[name="heard_about"][value="other"]');
+          const show = !!(other && other.checked);
+          if (wrap) wrap.hidden = !show;
+          if (otherInput) {
+            otherInput.required = show;
+            if (!show) otherInput.setCustomValidity('');
+          }
+        }
+        form.querySelectorAll('input[name="heard_about"]').forEach((r) => r.addEventListener('change', update));
+        update();
+      })();
+
       form.querySelectorAll('[data-next]').forEach((b) => b.addEventListener('click', goNext));
       form.querySelectorAll('[data-back]').forEach((b) => b.addEventListener('click', goBack));
 
@@ -496,7 +569,13 @@
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         showBanner('', '');
-        if (!validateStep(TOTAL)) return;
+        for (let s = 1; s <= TOTAL; s++) {
+          if (!validateStep(s)) {
+            step = s;
+            activatePanel(s);
+            return;
+          }
+        }
 
         if (!hasSupabaseConfig()) {
           showBanner('err', 'Configure js/config.js with your Supabase URL and anon key first.');
@@ -506,9 +585,15 @@
         const fd = new FormData(form);
         const over = fd.get('over_23');
 
+        const heardVal = String(fd.get('heard_about') || '').trim();
+        const heardOther = String(fd.get('heard_about_other') || '').trim();
+        const heard_about =
+          heardVal === 'other' ? (heardOther ? 'other: ' + heardOther : '') : heardVal;
+
         const payload = {
           over_23: over === 'yes',
           fitness_goal: String(fd.get('fitness_goal') || '').trim(),
+          heard_about,
           first_name: String(fd.get('first_name') || '').trim(),
           last_name: String(fd.get('last_name') || '').trim(),
           email: String(fd.get('email') || '').trim(),
@@ -526,11 +611,11 @@
         };
 
         if (!payload.over_23) {
-          showBanner('err', 'You must be over 23 to apply.');
+          showBanner('err', 'You must be over 23 to book a call.');
           return;
         }
         if (!payload.consent) {
-          showBanner('err', 'Please accept the consent statement to submit.');
+          showBanner('err', 'Please accept the consent statement to book a call.');
           return;
         }
         if (!payload.phone) {
@@ -541,9 +626,13 @@
           showBanner('err', 'Please complete all steps, including your fitness goal.');
           return;
         }
+        if (!payload.heard_about) {
+          showBanner('err', 'Please complete how you heard about Kiru.');
+          return;
+        }
 
         submitBtn.disabled = true;
-        submitBtn.textContent = 'Sending…';
+        submitBtn.textContent = 'Booking…';
 
         const base = window.SUPABASE_URL.trim().replace(/\/$/, '');
         const key = window.SUPABASE_ANON_KEY.trim();
@@ -567,21 +656,22 @@
           submitErr = err;
         }
 
-        submitBtn.disabled = false;
-        submitBtn.textContent = 'Submit';
-
         if (submitErr) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Book my call';
           console.error(submitErr);
           showBanner('err', submitErr.message || 'Something went wrong. Check Supabase RLS and that your table matches the expected columns.');
           return;
         }
 
-        panels.forEach((p) => p.classList.remove('active'));
-        const donePanel = form.querySelector('.panel[data-step="done"]');
-        if (donePanel) donePanel.classList.add('active');
-        stepLabel.textContent = 'Complete';
-        progressFill.style.width = '100%';
-        showBanner('ok', 'Your application was submitted successfully.');
+        const calendly = new URL(CALENDLY_BOOK_URL);
+        if (payload.first_name) calendly.searchParams.set('first_name', payload.first_name);
+        if (payload.last_name) calendly.searchParams.set('last_name', payload.last_name);
+        if (payload.email) calendly.searchParams.set('email', payload.email);
+
+        submitBtn.textContent = 'Opening Calendly…';
+        showBanner('ok', 'Saved — taking you to pick a time.');
+        window.location.assign(calendly.toString());
       });
 
       activatePanel(1);

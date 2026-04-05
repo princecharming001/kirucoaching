@@ -1,0 +1,48 @@
+================================================================================
+EMAIL KIRU ON EACH APPLICATION — SETUP (Supabase + Resend)
+================================================================================
+
+1) RESEND
+   - Sign up at https://resend.com and create an API key.
+   - For production: verify your domain and set a "from" address on that domain.
+   - Until then, Resend may only allow sending to your own inbox from
+     onboarding@resend.dev — use NOTIFY_TO_EMAIL = your verified inbox for tests.
+
+2) DEPLOY THE EDGE FUNCTION
+   From the repo root (install Supabase CLI if needed):
+     supabase login
+     supabase link --project-ref YOUR_PROJECT_REF
+     supabase functions deploy notify-application
+
+3) SET SECRETS (Dashboard → Project Settings → Edge Functions → Secrets,
+   or CLI):
+     supabase secrets set RESEND_API_KEY=re_xxxx
+     supabase secrets set NOTIFY_TO_EMAIL=kiru@yourdomain.com
+     supabase secrets set WEBHOOK_SECRET=use-a-long-random-string
+     supabase secrets set RESEND_FROM="Elevated Potential Coaching <hello@yourdomain.com>"
+
+   RESEND_FROM is optional; defaults to onboarding@resend.dev (testing only).
+
+4) DATABASE WEBHOOK (fires after each INSERT — no change to apply.html)
+   Dashboard → Database → Webhooks → Create a new webhook:
+     - Table: public.applications
+     - Events: Insert
+     - Type: Supabase Edge Functions
+       OR HTTP Request:
+         URL: https://YOUR_PROJECT_REF.supabase.co/functions/v1/notify-application
+         HTTP method: POST
+         HTTP headers:
+           Authorization: Bearer YOUR_WEBHOOK_SECRET
+           (same value as WEBHOOK_SECRET above, with the word Bearer and a space)
+
+   If the UI offers "Edge Functions" → pick notify-application, you may still
+   need to add WEBHOOK_SECRET verification in the function — this function
+   expects: Authorization: Bearer <WEBHOOK_SECRET>
+
+   For "HTTP Request" webhooks, set the Authorization header exactly as above.
+
+5) TEST
+   Submit the form on the live site. Kiru should get one email per row.
+   Check Edge Function logs in Dashboard if emails don’t arrive.
+
+================================================================================

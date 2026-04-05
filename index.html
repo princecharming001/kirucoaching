@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Elevated Potential Coaching — by Kiru Rasengar</title>
+  <title>Elevated Potential Coaching — by Kiru Rasasegar</title>
+  <link rel="icon" href="assets/logo-mark.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Kanit:wght@400;700;900&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet" />
@@ -104,26 +105,45 @@
 
     .nav-logo {
       display: flex;
-      flex-direction: column;
-      line-height: 1;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.65rem;
+      line-height: 1.1;
       text-decoration: none;
+      max-width: min(16rem, 46vw);
     }
 
-    .nav-logo .wordmark {
+    .nav-logo-img {
+      flex-shrink: 0;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: block;
+      border-radius: 0.45rem;
+    }
+
+    .nav-logo-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.05rem;
+      min-width: 0;
+    }
+
+    .nav-logo-text .wordmark-nav {
       font-family: 'Kanit', sans-serif;
-      font-weight: 900;
-      font-size: 1.6rem;
+      font-weight: 800;
+      font-size: clamp(0.72rem, 2.4vw, 0.92rem);
       color: var(--accent);
-      letter-spacing: 0.05em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 1.15;
     }
 
-    .nav-logo .sub {
+    .nav-logo-text .sub {
       font-family: 'DM Sans', sans-serif;
-      font-size: 0.6rem;
+      font-size: 0.52rem;
       color: var(--muted);
-      letter-spacing: 0.25em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
-      margin-top: 1px;
     }
 
     /* ─── HERO ───────────────────────────────────────── */
@@ -276,6 +296,9 @@
     .fade-up.delay-2 { transition-delay: 0.2s; }
     .fade-up.delay-3 { transition-delay: 0.3s; }
     .fade-up.delay-4 { transition-delay: 0.4s; }
+    .fade-up.delay-5 { transition-delay: 0.5s; }
+    .fade-up.delay-6 { transition-delay: 0.6s; }
+    .fade-up.delay-7 { transition-delay: 0.7s; }
 
     .transform-header {
       margin-bottom: 3.5rem;
@@ -579,7 +602,7 @@
       width: 2.5rem;
       height: 2.5rem;
       border-radius: 50%;
-      border: 1px solid rgba(26, 46, 74, 0.18);
+      border: none;
       background: rgba(255, 255, 255, 0.9);
       color: var(--accent);
       cursor: pointer;
@@ -708,6 +731,24 @@
       border: 0;
     }
 
+    /* Local testimonial clip (.MOV / variable aspect) */
+    .video-wrap--testimonial {
+      aspect-ratio: unset;
+      height: auto;
+      min-height: 0;
+    }
+
+    .video-wrap--testimonial video {
+      position: relative;
+      inset: auto;
+      display: block;
+      width: 100%;
+      max-height: min(72vh, 640px);
+      height: auto;
+      object-fit: contain;
+      background: #0d0d0d;
+    }
+
     /* ─── INTRO — KIRU (TIMELINE) ─────────────────────── */
     #intro-kiru {
       background: var(--bg);
@@ -758,7 +799,8 @@
       width: 100%;
       max-width: 340px;
       margin: 0 auto;
-      perspective: 1400px;
+      overflow: hidden;
+      padding: 0;
       animation: kiru-photo-float 7s ease-in-out infinite;
     }
 
@@ -775,46 +817,66 @@
 
     .kiru-ba-stack {
       position: relative;
-      aspect-ratio: 3 / 4;
-      border-radius: 1.2rem;
+      display: grid;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      border-radius: 0;
       overflow: hidden;
-      border: 1px solid rgba(26,46,74,0.15);
-      box-shadow:
-        0 20px 48px rgba(26,46,74,0.2),
-        0 0 0 1px rgba(255,255,255,0.06) inset;
-      background: #c8beac;
+      border: none;
+      box-shadow: none;
+      background: transparent;
       cursor: pointer;
       outline: none;
-      transition: box-shadow 0.4s ease, transform 0.4s cubic-bezier(0.34, 1.4, 0.64, 1);
-      transform-style: preserve-3d;
+      transition: opacity 0.2s ease;
     }
 
     .kiru-ba-stack:hover {
-      box-shadow:
-        0 28px 64px rgba(26,46,74,0.22),
-        0 0 0 1px rgba(255,255,255,0.08) inset;
-      transform: translateZ(12px) rotateX(2deg);
+      opacity: 0.98;
     }
 
     .kiru-ba-stack:focus-visible {
-      box-shadow: 0 0 0 3px rgba(26,46,74,0.4);
+      outline: 2px solid rgba(26, 46, 74, 0.45);
+      outline-offset: 4px;
     }
 
-    .kiru-ba-stack:active {
-      transform: scale(0.988) translateZ(0);
+    .kiru-ba-stack.is-revealed:hover {
+      opacity: 1;
     }
 
     .kiru-ba-layer {
-      position: absolute;
-      inset: 0;
+      grid-area: 1 / 1;
+      position: relative;
+      width: 100%;
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
     }
 
-    .kiru-ba-layer img {
+    .kiru-img-crop {
+      width: 100%;
+      align-self: start;
+      overflow: hidden;
+      background: transparent;
+    }
+
+    .kiru-img-crop img {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: transparent;
+    }
+
+    .kiru-img-crop.is-trimmed {
+      aspect-ratio: var(--kiru-ar-w) / var(--kiru-ar-h);
+    }
+
+    .kiru-img-crop.is-trimmed img {
       width: 100%;
       height: 100%;
-      display: block;
       object-fit: cover;
-      object-position: center top;
+      object-position: var(--kiru-ox) var(--kiru-oy);
     }
 
     .kiru-ba-before {
@@ -823,45 +885,14 @@
 
     .kiru-ba-after {
       z-index: 2;
-      transform: translateX(0) scale(1);
+      transform: translateX(0);
       transform-origin: center center;
-      transition:
-        transform 0.9s cubic-bezier(0.65, 0, 0.2, 1),
-        filter 0.9s cubic-bezier(0.65, 0, 0.2, 1);
+      transition: transform 0.55s cubic-bezier(0.25, 0.85, 0.3, 1);
       will-change: transform;
     }
 
     .kiru-ba-stack.is-revealed .kiru-ba-after {
-      transform: translateX(108%) scale(0.94);
-      filter: brightness(0.92);
-    }
-
-    .kiru-ba-shine {
-      position: absolute;
-      inset: 0;
-      z-index: 3;
-      pointer-events: none;
-      background: linear-gradient(
-        105deg,
-        transparent 35%,
-        rgba(255, 255, 255, 0.18) 48%,
-        rgba(255, 255, 255, 0.28) 50%,
-        rgba(255, 255, 255, 0.14) 52%,
-        transparent 65%
-      );
-      opacity: 0;
-      transform: translateX(-100%) skewX(-12deg);
-      transition: opacity 0.25s ease;
-    }
-
-    .kiru-ba-stack.is-animating .kiru-ba-shine {
-      opacity: 1;
-      animation: kiru-shine-sweep 0.95s cubic-bezier(0.25, 0.9, 0.35, 1) forwards;
-    }
-
-    @keyframes kiru-shine-sweep {
-      0% { transform: translateX(-120%) skewX(-12deg); }
-      100% { transform: translateX(120%) skewX(-12deg); }
+      transform: translateX(100%);
     }
 
     .kiru-photo-label {
@@ -873,8 +904,8 @@
       letter-spacing: 0.14em;
       text-transform: uppercase;
       color: #fff;
-      background: rgba(0, 0, 0, 0.62);
-      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(0, 0, 0, 0.55);
+      border: none;
       border-radius: 999px;
       padding: 0.2rem 0.55rem;
       z-index: 2;
@@ -884,7 +915,7 @@
       z-index: 1;
       color: var(--navy);
       background: var(--beige);
-      border: 1px solid rgba(26, 46, 74, 0.22);
+      border: none;
     }
 
     .kiru-ba-hint {
@@ -898,28 +929,25 @@
       letter-spacing: 0.12em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.92);
-      background: rgba(0, 0, 0, 0.55);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      background: rgba(0, 0, 0, 0.5);
+      border: none;
       border-radius: 999px;
       padding: 0.4rem 0.85rem;
       pointer-events: none;
       white-space: nowrap;
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
+      transition: opacity 0.35s ease, visibility 0.35s ease;
+    }
+
+    .kiru-ba-hint.is-hidden {
+      opacity: 0;
+      visibility: hidden;
     }
 
     @media (prefers-reduced-motion: reduce) {
       .kiru-ba-after {
-        transition: transform 0.01s ease, filter 0.01s ease;
-      }
-
-      .kiru-ba-stack.is-animating .kiru-ba-shine {
-        animation: none;
-        opacity: 0;
-      }
-
-      .kiru-ba-stack:hover {
-        transform: none;
+        transition: transform 0.15s ease;
       }
     }
 
@@ -1105,20 +1133,6 @@
       padding: 0.75rem 0;
     }
 
-    .results-carousel-caption {
-      margin: 0;
-      text-align: center;
-      padding: 1.1rem var(--side) 1.5rem;
-      font-family: 'DM Sans', sans-serif;
-      font-size: clamp(0.9rem, 2vw, 1.05rem);
-      font-weight: 500;
-      color: rgba(26, 46, 74, 0.92);
-      letter-spacing: 0.03em;
-      line-height: 1.45;
-      border-top: 1px solid rgba(26, 46, 74, 0.1);
-      background: linear-gradient(180deg, rgba(245, 240, 232, 0.35) 0%, transparent 100%);
-    }
-
     .results-track {
       display: flex;
       align-items: stretch;
@@ -1130,23 +1144,70 @@
 
     .results-item {
       flex: 0 0 auto;
+      display: flex;
+      flex-direction: column;
       width: min(460px, 88vw);
-      height: min(300px, 42vw);
-      min-height: 220px;
       overflow: hidden;
       background: #c8beac;
-      border-left: 1px solid rgba(26,46,74,0.1);
     }
 
-    .results-item:last-child {
-      border-right: 1px solid rgba(26,46,74,0.1);
+    .results-item-stack {
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .results-item-caption {
+      margin: 0;
+      flex-shrink: 0;
+      padding: 0.65rem 1rem 0.9rem;
+      text-align: center;
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(0.8rem, 2vw, 0.93rem);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.45;
+      color: rgba(26, 46, 74, 0.95);
+      background: linear-gradient(180deg, rgba(245, 240, 232, 0.97) 0%, rgba(232, 223, 201, 0.9) 100%);
+    }
+
+    .results-testimonial-block {
+      padding: 3rem var(--side) 3.5rem;
+      background: var(--bg);
+      border-bottom: 1px solid rgba(26, 46, 74, 0.08);
+    }
+
+    .results-testimonial-block .container {
+      max-width: 720px;
+      text-align: center;
+    }
+
+    .results-testimonial-title {
+      font-family: 'Kanit', sans-serif;
+      font-size: clamp(1.35rem, 3.5vw, 1.85rem);
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--navy);
+      margin: 0.35rem 0 0.5rem;
+    }
+
+    .results-testimonial-lead {
+      color: var(--muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin: 0 0 1.35rem;
+      max-width: 28rem;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .results-pair {
       display: flex;
       width: 100%;
-      height: 100%;
-      min-height: inherit;
+      flex: 1 1 auto;
+      min-height: min(260px, 42vw);
     }
 
     .results-pair-half {
@@ -1191,8 +1252,20 @@
     }
 
     .results-pair-after .results-pair-label {
-      border-color: rgba(255, 107, 43, 0.35);
+      bottom: 0.65rem;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 2;
+      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      padding: 0.4rem 0.85rem;
       color: var(--accent);
+      background: linear-gradient(180deg, #fffef8 0%, #f0ebe3 100%);
+      border: 2px solid var(--accent);
+      box-shadow:
+        0 0 0 1px rgba(255, 255, 255, 0.85) inset,
+        0 4px 14px rgba(26, 46, 74, 0.35);
     }
 
     @keyframes results-marquee {
@@ -1266,8 +1339,124 @@
       font-size: 0.95rem;
     }
 
+    /* ─── WHAT YOU GET (minimal) ─────────────────────── */
+    #what-you-get {
+      background: var(--bg);
+    }
+
+    #what-you-get .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    #what-you-get .section-label,
+    #what-you-get .section-heading {
+      width: 100%;
+      max-width: 40rem;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #what-you-get .section-heading {
+      margin-bottom: 0.65rem;
+    }
+
+    #what-you-get .wyg-lead {
+      max-width: 30rem;
+      margin: 0 auto 1.75rem;
+      color: var(--muted);
+      font-size: 0.94rem;
+      line-height: 1.6;
+    }
+
+    .wyg-grid {
+      width: 100%;
+      max-width: 34rem;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr;
+      column-gap: 0;
+      row-gap: 0;
+      text-align: left;
+      border-top: 1px solid rgba(26, 46, 74, 0.09);
+    }
+
+    @media (min-width: 680px) {
+      .wyg-grid {
+        max-width: 48rem;
+        grid-template-columns: 1fr 1fr;
+        column-gap: 2.5rem;
+        row-gap: 0;
+      }
+    }
+
+    .wyg-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.85rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(26, 46, 74, 0.09);
+    }
+
+    .wyg-card:last-child {
+      border-bottom: none;
+    }
+
+    @media (min-width: 680px) {
+      .wyg-card:nth-child(6) {
+        border-bottom: none;
+      }
+    }
+
+    .wyg-icon {
+      flex-shrink: 0;
+      width: 1.35rem;
+      height: 1.35rem;
+      margin-top: 0.2rem;
+      color: var(--accent);
+      opacity: 0.88;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .wyg-icon svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .wyg-card-body {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .wyg-card-title {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.98rem;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+      text-transform: none;
+      color: var(--navy);
+      margin: 0 0 0.3rem;
+      line-height: 1.35;
+    }
+
+    .wyg-card-copy {
+      font-size: 0.88rem;
+      line-height: 1.55;
+      color: var(--muted);
+      margin: 0;
+    }
+
     /* ─── APPLICATION ────────────────────────────────── */
-    #apply {
+    #book-call {
       background: var(--bg);
     }
 
@@ -1375,14 +1564,30 @@
       text-align: center;
     }
 
+    .footer-brand {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-brand .footer-mark {
+      width: 2.75rem;
+      height: 2.75rem;
+      border-radius: 0.5rem;
+      display: block;
+    }
+
     .footer-logo {
       font-family: 'Kanit', sans-serif;
       font-weight: 900;
-      font-size: 1.2rem;
+      font-size: clamp(0.85rem, 2.8vw, 1.2rem);
       color: var(--beige-warm);
       letter-spacing: 0.1em;
       text-transform: uppercase;
-      margin-bottom: 1rem;
+      max-width: 22rem;
+      line-height: 1.25;
     }
 
     .footer-links {
@@ -1457,8 +1662,10 @@
 
       .results-item {
         width: min(320px, 88vw);
-        height: min(220px, 48vw);
-        min-height: 160px;
+      }
+
+      .results-pair {
+        min-height: min(200px, 46vw);
       }
     }
   </style>
@@ -1467,17 +1674,21 @@
 
   <!-- NAV -->
   <nav>
-    <a href="index.html" class="nav-logo">
-      <span class="wordmark">KIRU</span>
-      <span class="sub">Coaching</span>
+    <a href="index.html" class="nav-logo" aria-label="Elevated Potential Coaching — home">
+      <img class="nav-logo-img" src="assets/logo-mark.svg" width="40" height="40" alt="" role="presentation" decoding="async" />
+      <span class="nav-logo-text">
+        <span class="wordmark-nav">Elevated Potential</span>
+        <span class="sub">Coaching</span>
+      </span>
     </a>
     <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
       <a href="#client-results" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Results</a>
       <a href="#who-help" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Who I help</a>
+      <a href="#what-you-get" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">What you get</a>
       <a href="#video" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Video</a>
       <a href="#testimonials" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Reviews</a>
       <a href="#intro-kiru" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Intro</a>
-      <a href="apply.html" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Apply</a>
+      <a href="apply.html" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Book a call</a>
     </div>
   </nav>
 
@@ -1490,9 +1701,9 @@
         BUILD MUSCLE,<br />
         <span>ELEVATE YOUR POTENTIAL.</span>
       </h1>
-      <p class="hero-byline">by Kiru Rasengar</p>
-      <p class="hero-sub">1:1 coaching where I guide your <strong>training, nutrition, and lifestyle</strong> so you stay consistent long term.</p>
-      <a href="apply.html" class="btn hero-btn" style="font-size: 1.1rem; padding: 1rem 2.4rem;">Apply Now &rarr;</a>
+      <p class="hero-byline">by Kiru Rasasegar</p>
+      <p class="hero-sub">1:1 coaching where I guide your training, nutrition, and lifestyle so you actually get results.</p>
+      <a href="apply.html" class="btn hero-btn" style="font-size: 1.1rem; padding: 1rem 2.4rem;">Book a call &rarr;</a>
     </div>
   </section>
 
@@ -1508,109 +1719,149 @@
     <div class="results-fullbleed">
       <div class="results-rail-mask">
         <div class="results-track" id="results-track">
-          <!-- Each slide: before (odd asset) + after (next asset) — duplicated for infinite loop -->
+          <!-- Each item: before/after + caption — duplicated for infinite loop -->
           <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 1">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/a4befb4dfce622460b9d4647353d54b8278b18af-9a61dda4-2760-478d-a803-59b087416949.png" alt="Before — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 1 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/a4befb4dfce622460b9d4647353d54b8278b18af-9a61dda4-2760-478d-a803-59b087416949.png" alt="Before — client transformation 1" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/d7e5d6abd5eee1aa16909478d1c5e94a7ef270e4-aedcb23a-e6b6-446b-92f3-c3fead8deb0c.png" alt="After — client transformation 1" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/d7e5d6abd5eee1aa16909478d1c5e94a7ef270e4-aedcb23a-e6b6-446b-92f3-c3fead8deb0c.png" alt="After — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
-              </div>
+              <p class="results-item-caption">Leaner, stronger, and more consistent — without living in the gym.</p>
             </div>
           </div>
           <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 2">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/113840fa7caacc95932d0c7fbf993e45712042e4-e5dadb56-2d33-4805-9c15-8595b20fc273.png" alt="Before — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 2 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/113840fa7caacc95932d0c7fbf993e45712042e4-e5dadb56-2d33-4805-9c15-8595b20fc273.png" alt="Before — client transformation 2" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/97166be1548eab61217a3c448dc67ae9f471bb55-dcdc1523-07c6-4364-b7b6-a4c4f29c1921.png" alt="After — client transformation 2" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/97166be1548eab61217a3c448dc67ae9f471bb55-dcdc1523-07c6-4364-b7b6-a4c4f29c1921.png" alt="After — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
-              </div>
+              <p class="results-item-caption">Visible definition and fat loss with a plan built around a busy schedule.</p>
             </div>
           </div>
           <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 3">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/0cf27a9fd260cd57b2897f21e72522b51fd04f35-2fe07a2d-ad3e-4143-a528-284de5c75cd3.png" alt="Before — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 3 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/0cf27a9fd260cd57b2897f21e72522b51fd04f35-2fe07a2d-ad3e-4143-a528-284de5c75cd3.png" alt="Before — client transformation 3" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/3315f5e5acf95d85fc1d4cccc8b83648643011c8-057822b3-443c-4393-bb51-8762bad74e6b.png" alt="After — client transformation 3" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/3315f5e5acf95d85fc1d4cccc8b83648643011c8-057822b3-443c-4393-bb51-8762bad74e6b.png" alt="After — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
-              </div>
+              <p class="results-item-caption">No more “starting over every Monday” — weekly check-ins kept progress real.</p>
             </div>
           </div>
           <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 4">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/ef39f07a36e0c7f3750ea8130593e08e6b87bad0-c0bf6575-70ee-49ad-914d-eaa21d2b8d8f.png" alt="Before — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 4 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/ef39f07a36e0c7f3750ea8130593e08e6b87bad0-c0bf6575-70ee-49ad-914d-eaa21d2b8d8f.png" alt="Before — client transformation 4" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/2ff21ca66c5850005da6ec1886efd6364547d474-7eca8532-588e-4fc9-b213-acaee5a152af.png" alt="After — client transformation 4" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/2ff21ca66c5850005da6ec1886efd6364547d474-7eca8532-588e-4fc9-b213-acaee5a152af.png" alt="After — client progress" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
-              </div>
+              <p class="results-item-caption">More energy, better lifts, and sustainable progress week after week.</p>
             </div>
           </div>
-          <!-- duplicate strip for seamless loop -->
+          <!-- duplicate strip -->
           <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 1">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/a4befb4dfce622460b9d4647353d54b8278b18af-9a61dda4-2760-478d-a803-59b087416949.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 1 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/a4befb4dfce622460b9d4647353d54b8278b18af-9a61dda4-2760-478d-a803-59b087416949.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/d7e5d6abd5eee1aa16909478d1c5e94a7ef270e4-aedcb23a-e6b6-446b-92f3-c3fead8deb0c.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/d7e5d6abd5eee1aa16909478d1c5e94a7ef270e4-aedcb23a-e6b6-446b-92f3-c3fead8deb0c.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
-              </div>
-            </div>
-          </div>
-          <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 2">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/113840fa7caacc95932d0c7fbf993e45712042e4-e5dadb56-2d33-4805-9c15-8595b20fc273.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
-              </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/97166be1548eab61217a3c448dc67ae9f471bb55-dcdc1523-07c6-4364-b7b6-a4c4f29c1921.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
-              </div>
+              <p class="results-item-caption">Leaner, stronger, and more consistent — without living in the gym.</p>
             </div>
           </div>
           <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 3">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/0cf27a9fd260cd57b2897f21e72522b51fd04f35-2fe07a2d-ad3e-4143-a528-284de5c75cd3.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 2 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/113840fa7caacc95932d0c7fbf993e45712042e4-e5dadb56-2d33-4805-9c15-8595b20fc273.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/97166be1548eab61217a3c448dc67ae9f471bb55-dcdc1523-07c6-4364-b7b6-a4c4f29c1921.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/3315f5e5acf95d85fc1d4cccc8b83648643011c8-057822b3-443c-4393-bb51-8762bad74e6b.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
-              </div>
+              <p class="results-item-caption">Visible definition and fat loss with a plan built around a busy schedule.</p>
             </div>
           </div>
           <div class="results-item">
-            <div class="results-pair" role="group" aria-label="Transformation pair 4">
-              <div class="results-pair-half results-pair-before">
-                <img src="assets/ef39f07a36e0c7f3750ea8130593e08e6b87bad0-c0bf6575-70ee-49ad-914d-eaa21d2b8d8f.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">Before</span>
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 3 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/0cf27a9fd260cd57b2897f21e72522b51fd04f35-2fe07a2d-ad3e-4143-a528-284de5c75cd3.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/3315f5e5acf95d85fc1d4cccc8b83648643011c8-057822b3-443c-4393-bb51-8762bad74e6b.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
-              <div class="results-pair-half results-pair-after">
-                <img src="assets/2ff21ca66c5850005da6ec1886efd6364547d474-7eca8532-588e-4fc9-b213-acaee5a152af.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                <span class="results-pair-label">After</span>
+              <p class="results-item-caption">No more “starting over every Monday” — weekly check-ins kept progress real.</p>
+            </div>
+          </div>
+          <div class="results-item">
+            <div class="results-item-stack">
+              <div class="results-pair" role="group" aria-label="Transformation 4 before and after">
+                <div class="results-pair-half results-pair-before">
+                  <img src="assets/ef39f07a36e0c7f3750ea8130593e08e6b87bad0-c0bf6575-70ee-49ad-914d-eaa21d2b8d8f.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img src="assets/2ff21ca66c5850005da6ec1886efd6364547d474-7eca8532-588e-4fc9-b213-acaee5a152af.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
               </div>
+              <p class="results-item-caption">More energy, better lifts, and sustainable progress week after week.</p>
             </div>
           </div>
         </div>
       </div>
-      <p class="results-carousel-caption fade-up delay-2">
-        Mikael lost over 18 lbs in 2 weeks
-      </p>
+    </div>
+    <div class="results-testimonial-block">
+      <div class="container">
+        <span class="section-label fade-up">Client story</span>
+        <h3 class="results-testimonial-title fade-up delay-1">Testimonial video</h3>
+        <p class="results-testimonial-lead fade-up delay-2">Hear from a client in their own words.</p>
+        <div class="video-wrap video-wrap--testimonial fade-up delay-2" id="results-testimonial-wrap">
+          <!-- QuickTime .MOV — strongest support in Safari; add an MP4 source later for broader playback if needed. -->
+          <video
+            controls
+            playsinline
+            preload="metadata"
+            aria-label="Client testimonial video"
+          >
+            <source src="assets/kirutest.MOV" type="video/quicktime" />
+            <a href="assets/kirutest.MOV">Download testimonial video</a>
+          </video>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -1642,21 +1893,96 @@
     </div>
   </section>
 
+  <!-- 2b) WHAT YOU GET -->
+  <section id="what-you-get" aria-label="What you get with coaching">
+    <div class="container">
+      <span class="section-label fade-up">Coaching</span>
+      <h2 class="section-heading fade-up delay-1">WHAT YOU GET</h2>
+      <p class="wyg-lead fade-up delay-2">
+        Included when we work together: structure, feedback, and accountability.
+      </p>
+      <div class="wyg-grid">
+        <article class="wyg-card fade-up delay-1">
+          <div class="wyg-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+          </div>
+          <div class="wyg-card-body">
+            <h3 class="wyg-card-title">Direct access to me</h3>
+            <p class="wyg-card-copy">Reach out anytime you need clarity, support, or a push. You’re not doing this alone.</p>
+          </div>
+        </article>
+        <article class="wyg-card fade-up delay-1">
+          <div class="wyg-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M17 9l5 3.5v5L17 15V9z"/></svg>
+          </div>
+          <div class="wyg-card-body">
+            <h3 class="wyg-card-title">Form checks</h3>
+            <p class="wyg-card-copy">Send your lifts and I’ll break them down so you train properly and keep improving.</p>
+          </div>
+        </article>
+        <article class="wyg-card fade-up delay-1">
+          <div class="wyg-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18M8 14h2M8 18h2M14 14h2M14 18h2"/></svg>
+          </div>
+          <div class="wyg-card-body">
+            <h3 class="wyg-card-title">Weekly check-ins</h3>
+            <p class="wyg-card-copy">You’ll check in each week so we can review your progress and stay on track.</p>
+          </div>
+        </article>
+        <article class="wyg-card fade-up delay-1">
+          <div class="wyg-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><line x1="4" y1="7" x2="20" y2="7"/><circle cx="9" cy="7" r="2"/><line x1="4" y1="12" x2="20" y2="12"/><circle cx="15" cy="12" r="2"/><line x1="4" y1="17" x2="20" y2="17"/><circle cx="11" cy="17" r="2"/></svg>
+          </div>
+          <div class="wyg-card-body">
+            <h3 class="wyg-card-title">Ongoing adjustments</h3>
+            <p class="wyg-card-copy">Your training and nutrition are updated based on your results so you keep moving forward.</p>
+          </div>
+        </article>
+        <article class="wyg-card fade-up delay-1">
+          <div class="wyg-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4M9 8h4"/></svg>
+          </div>
+          <div class="wyg-card-body">
+            <h3 class="wyg-card-title">Structured training plan</h3>
+            <p class="wyg-card-copy">Everything is laid out so you know exactly what to do every time you step into the gym.</p>
+          </div>
+        </article>
+        <article class="wyg-card fade-up delay-1">
+          <div class="wyg-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 22c4-4 8-10 8-16a8 8 0 0 0-8 8 8 8 0 0 0-8-8c0 6 4 12 8 16z"/><path d="M12 22V12"/></svg>
+          </div>
+          <div class="wyg-card-body">
+            <h3 class="wyg-card-title">Nutrition guidance</h3>
+            <p class="wyg-card-copy">Calories and macros tailored to your lifestyle so you can lose fat without overcomplicating it.</p>
+          </div>
+        </article>
+        <article class="wyg-card fade-up delay-1">
+          <div class="wyg-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/><path d="M12 6v2M12 16v2M6 12h2M16 12h2"/></svg>
+          </div>
+          <div class="wyg-card-body">
+            <h3 class="wyg-card-title">Real accountability</h3>
+            <p class="wyg-card-copy">You’re held to a high standard. If things slip, we fix it and keep going.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- 3) VIDEO -->
   <section id="video">
     <div class="container">
       <span class="section-label fade-up">Watch</span>
       <h2 class="section-heading fade-up delay-1">SEE THE PROCESS</h2>
       <div class="video-wrap fade-up delay-2" id="yt-wrap" style="margin-top:0.5rem;">
-        <button type="button" class="video-preview" id="yt-preview" aria-label="Play video on YouTube">
-          <img
-            src="https://img.youtube.com/vi/UnosqKmNILg/maxresdefault.jpg"
-            alt=""
-            width="1280"
-            height="720"
-            loading="lazy"
-            decoding="async"
-          />
+        <button
+          type="button"
+          class="video-preview js-youtube-play"
+          id="yt-preview"
+          data-youtube-id="UnosqKmNILg"
+          aria-label="Play video on YouTube"
+        >
+          <img src="" alt="" width="1280" height="720" loading="lazy" decoding="async" />
           <span class="play-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
           </span>
@@ -1847,23 +2173,26 @@
       <div class="kiru-layout">
         <div class="kiru-photo-stack" id="kiru-photo-stack">
           <div
-            class="kiru-ba-stack"
+            class="kiru-ba-stack is-revealed"
             id="kiru-ba-stack"
             role="button"
             tabindex="0"
-            aria-pressed="false"
-            aria-label="After photo. Activate to reveal before photo."
+            aria-pressed="true"
+            aria-label="Kiru before photo. Click to compare with after."
           >
             <div class="kiru-ba-layer kiru-ba-before">
-              <img src="assets/mikael-before.png" alt="Mikael — before" width="900" height="1600" loading="lazy" decoding="async" />
+              <div class="kiru-img-crop">
+                <img src="assets/mikael-before.png" alt="Kiru — before" width="900" height="1600" loading="lazy" decoding="async" />
+              </div>
               <span class="kiru-photo-label">Before</span>
             </div>
             <div class="kiru-ba-layer kiru-ba-after">
-              <img src="assets/mikael-after.png" alt="Mikael — after" width="900" height="1600" loading="lazy" decoding="async" />
+              <div class="kiru-img-crop">
+                <img src="assets/mikael-after.png" alt="Kiru — after" width="900" height="1600" loading="lazy" decoding="async" />
+              </div>
               <span class="kiru-photo-label">After</span>
             </div>
-            <div class="kiru-ba-shine" aria-hidden="true"></div>
-            <div class="kiru-ba-hint" id="kiru-ba-hint">Tap to see before</div>
+            <div class="kiru-ba-hint" id="kiru-ba-hint">Click to see after</div>
           </div>
         </div>
         <div class="kiru-timeline-column">
@@ -1892,16 +2221,16 @@
     </div>
   </section>
 
-  <!-- 6) APPLY CTA -->
-  <section id="apply">
+  <!-- 6) BOOK A CALL CTA -->
+  <section id="book-call">
     <div class="container">
       <div class="apply-inner">
         <div class="apply-left">
-          <h2>READY TO <span class="highlight">START?</span></h2>
-          <p>Tell me about your goals, schedule, and current starting point. I’ll review your application personally and reply with next steps within 24–48 hours.</p>
+          <h2>READY TO <span class="highlight">BOOK A CALL?</span></h2>
+          <p>Tell me about your goals, schedule, and starting point. I’ll follow up personally to book your call — usually within 24–48 hours.</p>
         </div>
         <div class="apply-right" style="justify-content:center;">
-          <a href="apply.html" class="btn btn-submit" style="text-align:center;width:100%;max-width:320px;">Complete your application &rarr;</a>
+          <a href="apply.html" class="btn btn-submit" style="text-align:center;width:100%;max-width:320px;">Book a call &rarr;</a>
         </div>
       </div>
     </div>
@@ -1909,7 +2238,10 @@
 
   <!-- FOOTER -->
   <footer>
-    <div class="footer-logo">KIRU COACHING</div>
+    <div class="footer-brand">
+      <img class="footer-mark" src="assets/logo-mark.svg" width="44" height="44" alt="" decoding="async" />
+      <div class="footer-logo">Elevated Potential Coaching</div>
+    </div>
     <div class="footer-links">
       <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
@@ -1924,7 +2256,7 @@
         hello@kirucoaching.com
       </a>
     </div>
-    <p class="footer-copy">&copy; 2026 Kiru Coaching. All rights reserved.</p>
+    <p class="footer-copy">&copy; 2026 Elevated Potential Coaching. All rights reserved.</p>
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
@@ -1944,6 +2276,111 @@
       { threshold: 0.12 }
     );
     fadeEls.forEach((el) => observer.observe(el));
+
+    // Intro — Kiru: auto-crop embedded black letterboxing / pillarboxing on before/after PNGs
+    (function () {
+      const stack = document.getElementById('kiru-ba-stack');
+      if (!stack) return;
+
+      function lum(r, g, b) {
+        return 0.299 * r + 0.587 * g + 0.114 * b;
+      }
+
+      function findContentBounds(ctx, cw, ch) {
+        let imageData;
+        try {
+          imageData = ctx.getImageData(0, 0, cw, ch);
+        } catch (e) {
+          return null;
+        }
+        const data = imageData.data;
+        const thr = 34;
+        const step = 2;
+
+        function rowDarkRatio(y) {
+          let dark = 0;
+          let n = 0;
+          for (let x = 0; x < cw; x += step) {
+            n++;
+            const i = (Math.min(y, ch - 1) * cw + x) * 4;
+            if (lum(data[i], data[i + 1], data[i + 2]) <= thr) dark++;
+          }
+          return n ? dark / n : 1;
+        }
+
+        function colDarkRatio(x) {
+          let dark = 0;
+          let n = 0;
+          for (let y = 0; y < ch; y += step) {
+            n++;
+            const i = (y * cw + Math.min(x, cw - 1)) * 4;
+            if (lum(data[i], data[i + 1], data[i + 2]) <= thr) dark++;
+          }
+          return n ? dark / n : 1;
+        }
+
+        let y0 = 0;
+        while (y0 < ch && rowDarkRatio(y0) > 0.92) y0++;
+        let y1 = ch - 1;
+        while (y1 > y0 && rowDarkRatio(y1) > 0.92) y1--;
+        let x0 = 0;
+        while (x0 < cw && colDarkRatio(x0) > 0.92) x0++;
+        let x1 = cw - 1;
+        while (x1 > x0 && colDarkRatio(x1) > 0.92) x1--;
+
+        return { x0, y0, x1, y1 };
+      }
+
+      function trimImage(img) {
+        const wrap = img.closest('.kiru-img-crop');
+        if (!wrap) return;
+
+        function run() {
+          const nw = img.naturalWidth;
+          const nh = img.naturalHeight;
+          if (!nw || !nh) return;
+
+          const maxSide = 480;
+          const sc = Math.min(1, maxSide / Math.max(nw, nh));
+          const cw = Math.max(1, Math.floor(nw * sc));
+          const ch = Math.max(1, Math.floor(nh * sc));
+
+          const canvas = document.createElement('canvas');
+          canvas.width = cw;
+          canvas.height = ch;
+          const ctx = canvas.getContext('2d', { willReadFrequently: true });
+          ctx.drawImage(img, 0, 0, cw, ch);
+          const b = findContentBounds(ctx, cw, ch);
+          if (!b) return;
+
+          const nx0 = Math.max(0, Math.floor((b.x0 * nw) / cw));
+          const ny0 = Math.max(0, Math.floor((b.y0 * nh) / ch));
+          const nx1 = Math.min(nw - 1, Math.floor(((b.x1 + 1) * nw) / cw) - 1);
+          const ny1 = Math.min(nh - 1, Math.floor(((b.y1 + 1) * nh) / ch) - 1);
+          if (nx1 < nx0 || ny1 < ny0) return;
+          const cropW = nx1 - nx0 + 1;
+          const cropH = ny1 - ny0 + 1;
+
+          if (cropW < 24 || cropH < 24) return;
+          const areaRatio = (cropW * cropH) / (nw * nh);
+          if (areaRatio > 0.992) return;
+
+          const cx = (nx0 + nx1) / 2;
+          const cy = (ny0 + ny1) / 2;
+
+          wrap.style.setProperty('--kiru-ar-w', String(cropW));
+          wrap.style.setProperty('--kiru-ar-h', String(cropH));
+          wrap.style.setProperty('--kiru-ox', (cx / nw) * 100 + '%');
+          wrap.style.setProperty('--kiru-oy', (cy / nh) * 100 + '%');
+          wrap.classList.add('is-trimmed');
+        }
+
+        if (img.complete && img.naturalWidth) run();
+        else img.addEventListener('load', run, { once: true });
+      }
+
+      stack.querySelectorAll('.kiru-img-crop img').forEach(trimImage);
+    })();
 
     // Intro — Kiru: centered layout — photo + timeline (GSAP ScrollTrigger; CSS fallback if CDN fails)
     (function () {
@@ -2268,42 +2705,33 @@
       });
     })();
 
-    // Intro — Kiru: before/after in one frame (tap after to reveal before)
+    // Intro — Kiru: before/after stack — starts on before; click toggles before ↔ after
     (function () {
       const stack = document.getElementById('kiru-ba-stack');
       const hint = document.getElementById('kiru-ba-hint');
       if (!stack || !hint) return;
 
-      function applyState(revealed) {
-        stack.classList.toggle('is-revealed', revealed);
-        stack.setAttribute('aria-pressed', revealed ? 'true' : 'false');
+      function syncUi() {
+        const beforeVisible = stack.classList.contains('is-revealed');
+        stack.setAttribute('aria-pressed', beforeVisible ? 'true' : 'false');
         stack.setAttribute(
           'aria-label',
-          revealed
-            ? 'Before photo visible. Activate to return to after photo.'
-            : 'After photo. Activate to reveal before photo.'
+          beforeVisible
+            ? 'Kiru before photo visible. Activate to see after.'
+            : 'Kiru after photo visible. Activate to see before.'
         );
-        hint.textContent = revealed ? 'Tap to see after' : 'Tap to see before';
-      }
-
-      function playShine() {
-        stack.classList.remove('is-animating');
-        void stack.offsetWidth;
-        stack.classList.add('is-animating');
-        window.setTimeout(function () {
-          stack.classList.remove('is-animating');
-        }, 900);
+        hint.textContent = beforeVisible ? 'Click to see after' : 'Click to see before';
+        hint.classList.remove('is-hidden');
       }
 
       function toggle() {
-        const next = !stack.classList.contains('is-revealed');
-        playShine();
-        applyState(next);
+        stack.classList.toggle('is-revealed');
+        syncUi();
       }
 
-      stack.addEventListener('click', function () {
-        toggle();
-      });
+      syncUi();
+
+      stack.addEventListener('click', toggle);
       stack.addEventListener('keydown', function (e) {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -2312,25 +2740,32 @@
       });
     })();
 
-    // YouTube: load iframe on first play (privacy-friendly embed)
+    // YouTube: thumbnails + load iframe on first play (privacy-friendly embed)
     (function () {
-      const wrap = document.getElementById('yt-wrap');
-      const preview = document.getElementById('yt-preview');
-      if (!wrap || !preview) return;
-      preview.addEventListener('click', function () {
-        const iframe = document.createElement('iframe');
-        iframe.setAttribute('title', 'Kiru Coaching — YouTube video');
-        iframe.setAttribute(
-          'src',
-          'https://www.youtube-nocookie.com/embed/UnosqKmNILg?autoplay=1&rel=0'
-        );
-        iframe.setAttribute('allowfullscreen', '');
-        iframe.setAttribute(
-          'allow',
-          'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
-        );
-        preview.remove();
-        wrap.appendChild(iframe);
+      document.querySelectorAll('.js-youtube-play[data-youtube-id]').forEach(function (preview) {
+        const id = preview.getAttribute('data-youtube-id');
+        const wrap = preview.closest('.video-wrap');
+        const img = preview.querySelector('img');
+        if (img && id) {
+          img.src = 'https://img.youtube.com/vi/' + id + '/maxresdefault.jpg';
+          img.alt = '';
+        }
+        if (!wrap || !id) return;
+        preview.addEventListener('click', function () {
+          const iframe = document.createElement('iframe');
+          iframe.setAttribute('title', preview.getAttribute('aria-label') || 'YouTube video');
+          iframe.setAttribute(
+            'src',
+            'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0'
+          );
+          iframe.setAttribute('allowfullscreen', '');
+          iframe.setAttribute(
+            'allow',
+            'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share'
+          );
+          preview.remove();
+          wrap.appendChild(iframe);
+        });
       });
     })();
 
