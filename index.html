@@ -146,6 +146,13 @@
       text-transform: uppercase;
     }
 
+    /* Narrow viewports (phones, small tablets): hide fixed nav — hero “Book a call” stays primary */
+    @media (max-width: 768px) {
+      nav {
+        display: none !important;
+      }
+    }
+
     /* ─── HERO ───────────────────────────────────────── */
     #hero {
       position: relative;
@@ -1138,7 +1145,7 @@
       align-items: stretch;
       gap: 0;
       width: max-content;
-      animation: results-marquee 40s linear infinite;
+      animation: results-marquee 60s linear infinite;
       will-change: transform;
     }
 
@@ -1203,69 +1210,13 @@
       margin-right: auto;
     }
 
-    .results-pair {
-      display: flex;
-      width: 100%;
-      flex: 1 1 auto;
-      min-height: min(260px, 42vw);
-    }
-
-    .results-pair-half {
-      position: relative;
-      flex: 1;
-      min-width: 0;
-      border-right: 1px solid rgba(26,46,74,0.12);
-    }
-
-    .results-pair-half:last-child {
-      border-right: none;
-    }
-
-    .results-pair-half img {
+    .results-slide-img {
       display: block;
       width: 100%;
-      height: 100%;
+      height: auto;
+      flex: 1 1 auto;
       object-fit: cover;
-      object-position: center top;
-    }
-
-    .results-pair-label {
-      position: absolute;
-      bottom: 0.5rem;
-      left: 50%;
-      transform: translateX(-50%);
-      font-family: 'Kanit', sans-serif;
-      font-size: 0.62rem;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.95);
-      background: rgba(0, 0, 0, 0.58);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 999px;
-      padding: 0.2rem 0.5rem;
-      pointer-events: none;
-      white-space: nowrap;
-    }
-
-    .results-pair-before .results-pair-label {
-      color: rgba(255, 255, 255, 0.88);
-    }
-
-    .results-pair-after .results-pair-label {
-      bottom: 0.65rem;
-      left: 50%;
-      transform: translateX(-50%);
-      z-index: 2;
-      font-size: clamp(0.68rem, 2.2vw, 0.82rem);
-      font-weight: 800;
-      letter-spacing: 0.18em;
-      padding: 0.4rem 0.85rem;
-      color: var(--accent);
-      background: linear-gradient(180deg, #fffef8 0%, #f0ebe3 100%);
-      border: 2px solid var(--accent);
-      box-shadow:
-        0 0 0 1px rgba(255, 255, 255, 0.85) inset,
-        0 4px 14px rgba(26, 46, 74, 0.35);
+      object-position: center;
     }
 
     @keyframes results-marquee {
@@ -1663,10 +1614,6 @@
       .results-item {
         width: min(320px, 88vw);
       }
-
-      .results-pair {
-        min-height: min(200px, 46vw);
-      }
     }
   </style>
 </head>
@@ -1719,128 +1666,80 @@
     <div class="results-fullbleed">
       <div class="results-rail-mask">
         <div class="results-track" id="results-track">
-          <!-- Each item: before/after + caption — duplicated for infinite loop -->
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 1 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/a4befb4dfce622460b9d4647353d54b8278b18af-9a61dda4-2760-478d-a803-59b087416949.png" alt="Before — client transformation 1" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/d7e5d6abd5eee1aa16909478d1c5e94a7ef270e4-aedcb23a-e6b6-446b-92f3-c3fead8deb0c.png" alt="After — client transformation 1" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
+              <img class="results-slide-img" src="assets/result-slide-01.png" alt="Client transformation 1" loading="lazy" decoding="async" />
               <p class="results-item-caption">Leaner, stronger, and more consistent — without living in the gym.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 2 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/113840fa7caacc95932d0c7fbf993e45712042e4-e5dadb56-2d33-4805-9c15-8595b20fc273.png" alt="Before — client transformation 2" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/97166be1548eab61217a3c448dc67ae9f471bb55-dcdc1523-07c6-4364-b7b6-a4c4f29c1921.png" alt="After — client transformation 2" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
+              <img class="results-slide-img" src="assets/result-slide-02.png" alt="Client transformation 2" loading="lazy" decoding="async" />
               <p class="results-item-caption">Visible definition and fat loss with a plan built around a busy schedule.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 3 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/0cf27a9fd260cd57b2897f21e72522b51fd04f35-2fe07a2d-ad3e-4143-a528-284de5c75cd3.png" alt="Before — client transformation 3" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/3315f5e5acf95d85fc1d4cccc8b83648643011c8-057822b3-443c-4393-bb51-8762bad74e6b.png" alt="After — client transformation 3" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
-              <p class="results-item-caption">No more “starting over every Monday” — weekly check-ins kept progress real.</p>
+              <img class="results-slide-img" src="assets/result-slide-03.png" alt="Client transformation 3" loading="lazy" decoding="async" />
+              <p class="results-item-caption">No more "starting over every Monday" — weekly check-ins kept progress real.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 4 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/ef39f07a36e0c7f3750ea8130593e08e6b87bad0-c0bf6575-70ee-49ad-914d-eaa21d2b8d8f.png" alt="Before — client transformation 4" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/2ff21ca66c5850005da6ec1886efd6364547d474-7eca8532-588e-4fc9-b213-acaee5a152af.png" alt="After — client transformation 4" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
+              <img class="results-slide-img" src="assets/result-slide-04.png" alt="Client transformation 4" loading="lazy" decoding="async" />
               <p class="results-item-caption">More energy, better lifts, and sustainable progress week after week.</p>
             </div>
           </div>
-          <!-- duplicate strip -->
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 1 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/a4befb4dfce622460b9d4647353d54b8278b18af-9a61dda4-2760-478d-a803-59b087416949.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/d7e5d6abd5eee1aa16909478d1c5e94a7ef270e4-aedcb23a-e6b6-446b-92f3-c3fead8deb0c.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
+              <img class="results-slide-img" src="assets/result-slide-05.png" alt="Client transformation 5" loading="lazy" decoding="async" />
+              <p class="results-item-caption">Consistent coaching turns effort into visible, lasting results.</p>
+            </div>
+          </div>
+          <div class="results-item">
+            <div class="results-item-stack">
+              <img class="results-slide-img" src="assets/result-slide-06.png" alt="Client transformation 6" loading="lazy" decoding="async" />
+              <p class="results-item-caption">Real change — posture, definition, and confidence you can see.</p>
+            </div>
+          </div>
+          <!-- duplicate strip for infinite loop -->
+          <div class="results-item">
+            <div class="results-item-stack">
+              <img class="results-slide-img" src="assets/result-slide-01.png" alt="" loading="lazy" decoding="async" />
               <p class="results-item-caption">Leaner, stronger, and more consistent — without living in the gym.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 2 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/113840fa7caacc95932d0c7fbf993e45712042e4-e5dadb56-2d33-4805-9c15-8595b20fc273.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/97166be1548eab61217a3c448dc67ae9f471bb55-dcdc1523-07c6-4364-b7b6-a4c4f29c1921.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
+              <img class="results-slide-img" src="assets/result-slide-02.png" alt="" loading="lazy" decoding="async" />
               <p class="results-item-caption">Visible definition and fat loss with a plan built around a busy schedule.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 3 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/0cf27a9fd260cd57b2897f21e72522b51fd04f35-2fe07a2d-ad3e-4143-a528-284de5c75cd3.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/3315f5e5acf95d85fc1d4cccc8b83648643011c8-057822b3-443c-4393-bb51-8762bad74e6b.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
-              <p class="results-item-caption">No more “starting over every Monday” — weekly check-ins kept progress real.</p>
+              <img class="results-slide-img" src="assets/result-slide-03.png" alt="" loading="lazy" decoding="async" />
+              <p class="results-item-caption">No more "starting over every Monday" — weekly check-ins kept progress real.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <div class="results-pair" role="group" aria-label="Transformation 4 before and after">
-                <div class="results-pair-half results-pair-before">
-                  <img src="assets/ef39f07a36e0c7f3750ea8130593e08e6b87bad0-c0bf6575-70ee-49ad-914d-eaa21d2b8d8f.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">Before</span>
-                </div>
-                <div class="results-pair-half results-pair-after">
-                  <img src="assets/2ff21ca66c5850005da6ec1886efd6364547d474-7eca8532-588e-4fc9-b213-acaee5a152af.png" alt="" width="400" height="533" loading="lazy" decoding="async" />
-                  <span class="results-pair-label">After</span>
-                </div>
-              </div>
+              <img class="results-slide-img" src="assets/result-slide-04.png" alt="" loading="lazy" decoding="async" />
               <p class="results-item-caption">More energy, better lifts, and sustainable progress week after week.</p>
             </div>
           </div>
+          <div class="results-item">
+            <div class="results-item-stack">
+              <img class="results-slide-img" src="assets/result-slide-05.png" alt="" loading="lazy" decoding="async" />
+              <p class="results-item-caption">Consistent coaching turns effort into visible, lasting results.</p>
+            </div>
+          </div>
+          <div class="results-item">
+            <div class="results-item-stack">
+              <img class="results-slide-img" src="assets/result-slide-06.png" alt="" loading="lazy" decoding="async" />
+              <p class="results-item-caption">Real change — posture, definition, and confidence you can see.</p>
+            </div>
+          </div>
+
         </div>
       </div>
     </div>
@@ -1850,15 +1749,16 @@
         <h3 class="results-testimonial-title fade-up delay-1">Testimonial video</h3>
         <p class="results-testimonial-lead fade-up delay-2">Hear from a client in their own words.</p>
         <div class="video-wrap video-wrap--testimonial fade-up delay-2" id="results-testimonial-wrap">
-          <!-- QuickTime .MOV — strongest support in Safari; add an MP4 source later for broader playback if needed. -->
+          <!-- MP4 first: Chrome / Firefox / Edge on laptop; MOV fallback for Safari -->
           <video
             controls
             playsinline
             preload="metadata"
             aria-label="Client testimonial video"
           >
+            <source src="assets/kiru-testimonial.mp4" type="video/mp4" />
             <source src="assets/kirutest.MOV" type="video/quicktime" />
-            <a href="assets/kirutest.MOV">Download testimonial video</a>
+            <a href="assets/kiru-testimonial.mp4">Download testimonial video (MP4)</a>
           </video>
         </div>
       </div>
@@ -2001,7 +1901,7 @@
           <span class="section-label fade-up">What clients send in</span>
           <h2 class="section-heading fade-up delay-1">MESSAGES &amp; WINS</h2>
           <p class="fade-up delay-2">
-            Swipe or use the arrows — the center thread is full size; side threads scale down for a simple depth effect. Representative messages, edited for clarity.
+            Real screenshots from client conversations. Swipe or use the arrows to browse.
           </p>
         </div>
 
@@ -2014,109 +1914,7 @@
           aria-label="Client testimonials"
         >
           <div class="imsg-track" id="imsg-track">
-            <article class="imsg-slide" data-caption="Marcus — arm growth while staying consistent with a busy schedule.">
-              <div class="imsg-scale-wrap">
-                <div class="imsg-chrome">
-                  <div class="imsg-island" aria-hidden="true"></div>
-                  <header class="imsg-header">
-                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
-                    </button>
-                    <div class="imsg-header-center">
-                      <div class="imsg-avatar" aria-hidden="true">M</div>
-                      <span class="imsg-name">marcus</span>
-                    </div>
-                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
-                    </button>
-                  </header>
-                  <div class="imsg-body">
-                    <p class="imsg-ts">Today 8:02 AM</p>
-                    <div class="imsg-row imsg-row-out">
-                      <div class="imsg-bubble imsg-bubble-out">Whatever you put me on for arms is actually working — I’m seeing size even when I’m not pumped.</div>
-                    </div>
-                    <div class="imsg-row imsg-row-in">
-                      <div class="imsg-bubble imsg-bubble-in">That’s consistency doing the work. Keep logging sessions — we’ll tweak volume on the next check-in.</div>
-                    </div>
-                  </div>
-                  <div class="imsg-composer" aria-hidden="true">
-                    <span class="imsg-composer-plus">+</span>
-                    <div class="imsg-composer-field">iMessage</div>
-                    <span class="imsg-composer-send">↑</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="imsg-slide" data-caption="Priya — check-ins that actually kept her showing up this month.">
-              <div class="imsg-scale-wrap">
-                <div class="imsg-chrome">
-                  <div class="imsg-island" aria-hidden="true"></div>
-                  <header class="imsg-header">
-                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
-                    </button>
-                    <div class="imsg-header-center">
-                      <div class="imsg-avatar" aria-hidden="true">P</div>
-                      <span class="imsg-name">priya</span>
-                    </div>
-                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
-                    </button>
-                  </header>
-                  <div class="imsg-body">
-                    <p class="imsg-ts">Yesterday 6:14 PM</p>
-                    <div class="imsg-row imsg-row-out">
-                      <div class="imsg-bubble imsg-bubble-out">Check-ins make me show up. I would’ve skipped three sessions this month without them.</div>
-                    </div>
-                    <div class="imsg-row imsg-row-in">
-                      <div class="imsg-bubble imsg-bubble-in">That’s what they’re for — clarity, not guilt. We’ll keep them short and useful.</div>
-                    </div>
-                  </div>
-                  <div class="imsg-composer" aria-hidden="true">
-                    <span class="imsg-composer-plus">+</span>
-                    <div class="imsg-composer-field">iMessage</div>
-                    <span class="imsg-composer-send">↑</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="imsg-slide" data-caption="Jordan — down 18 lbs without “starting over” every Monday.">
-              <div class="imsg-scale-wrap">
-                <div class="imsg-chrome">
-                  <div class="imsg-island" aria-hidden="true"></div>
-                  <header class="imsg-header">
-                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
-                    </button>
-                    <div class="imsg-header-center">
-                      <div class="imsg-avatar" aria-hidden="true">J</div>
-                      <span class="imsg-name">jordan</span>
-                    </div>
-                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
-                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
-                    </button>
-                  </header>
-                  <div class="imsg-body">
-                    <p class="imsg-ts">Tuesday 7:41 AM</p>
-                    <div class="imsg-row imsg-row-out">
-                      <div class="imsg-bubble imsg-bubble-out">Down 18 lbs and I’m not “starting over” every Monday anymore. The plan fits my life.</div>
-                    </div>
-                    <div class="imsg-row imsg-row-in">
-                      <div class="imsg-bubble imsg-bubble-in">Sustainable beats perfect. Proud of you — send a check-in pic when you can.</div>
-                    </div>
-                  </div>
-                  <div class="imsg-composer" aria-hidden="true">
-                    <span class="imsg-composer-plus">+</span>
-                    <div class="imsg-composer-field">iMessage</div>
-                    <span class="imsg-composer-send">↑</span>
-                  </div>
-                </div>
-              </div>
-            </article>
-
-            <article class="imsg-slide" data-caption="Chris — leg day volume finally dialed in (sore, not wrecked).">
+            <article class="imsg-slide" data-caption="Almost down 20 lbs in just 2 months.">
               <div class="imsg-scale-wrap">
                 <div class="imsg-chrome">
                   <div class="imsg-island" aria-hidden="true"></div>
@@ -2126,25 +1924,236 @@
                     </button>
                     <div class="imsg-header-center">
                       <div class="imsg-avatar" aria-hidden="true">C</div>
-                      <span class="imsg-name">chris</span>
+                      <span class="imsg-name">client</span>
                     </div>
                     <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
                       <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
                     </button>
                   </header>
                   <div class="imsg-body">
-                    <p class="imsg-ts">Monday 5:18 PM</p>
-                    <div class="imsg-row imsg-row-out">
-                      <div class="imsg-bubble imsg-bubble-out">Leg day used to wreck me for days. Volume finally feels dialed — sore, not destroyed.</div>
-                    </div>
-                    <div class="imsg-row imsg-row-in">
-                      <div class="imsg-bubble imsg-bubble-in">Love that distinction. If anything spikes again, message me before you grind through it.</div>
-                    </div>
+                    <p class="imsg-ts">Today 2:56 PM</p>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">bro</div></div>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">weighed in at my lowest today</div></div>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">138.6</div></div>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">almost down 20lbs since we started working together and it's only been 2 months</div></div>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">Ayeee!</div></div>
                   </div>
                   <div class="imsg-composer" aria-hidden="true">
                     <span class="imsg-composer-plus">+</span>
                     <div class="imsg-composer-field">iMessage</div>
-                    <span class="imsg-composer-send">↑</span>
+                    <span class="imsg-composer-send">&#x2191;</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="imsg-slide" data-caption="Life-changing impact beyond the gym.">
+              <div class="imsg-scale-wrap">
+                <div class="imsg-chrome">
+                  <div class="imsg-island" aria-hidden="true"></div>
+                  <header class="imsg-header">
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
+                    </button>
+                    <div class="imsg-header-center">
+                      <div class="imsg-avatar" aria-hidden="true">C</div>
+                      <span class="imsg-name">client</span>
+                    </div>
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    </button>
+                  </header>
+                  <div class="imsg-body">
+                    <p class="imsg-ts">6:47 PM</p>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">you've genuinely changed my life man, even outside of the gym and fitness stuff. so i appreciate u for it</div></div>
+                  </div>
+                  <div class="imsg-composer" aria-hidden="true">
+                    <span class="imsg-composer-plus">+</span>
+                    <div class="imsg-composer-field">iMessage</div>
+                    <span class="imsg-composer-send">&#x2191;</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="imsg-slide" data-caption="Bicep gains even without a pump.">
+              <div class="imsg-scale-wrap">
+                <div class="imsg-chrome">
+                  <div class="imsg-island" aria-hidden="true"></div>
+                  <header class="imsg-header">
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
+                    </button>
+                    <div class="imsg-header-center">
+                      <div class="imsg-avatar" aria-hidden="true">C</div>
+                      <span class="imsg-name">client</span>
+                    </div>
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    </button>
+                  </header>
+                  <div class="imsg-body">
+                    <p class="imsg-ts">7:01 PM</p>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">Yo I just wanted to say whatever bicep exercises you got me doing are working cause holy shit even with me hungry and not pumped up my biceps are getting swole af, thank you so much bro</div></div>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">Ayyeee, let's get ittttttt</div></div>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">It's all you bro, you are putting in THAT WORK</div></div>
+                  </div>
+                  <div class="imsg-composer" aria-hidden="true">
+                    <span class="imsg-composer-plus">+</span>
+                    <div class="imsg-composer-field">iMessage</div>
+                    <span class="imsg-composer-send">&#x2191;</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="imsg-slide" data-caption="Accountability that actually works.">
+              <div class="imsg-scale-wrap">
+                <div class="imsg-chrome">
+                  <div class="imsg-island" aria-hidden="true"></div>
+                  <header class="imsg-header">
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
+                    </button>
+                    <div class="imsg-header-center">
+                      <div class="imsg-avatar" aria-hidden="true">C</div>
+                      <span class="imsg-name">client</span>
+                    </div>
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    </button>
+                  </header>
+                  <div class="imsg-body">
+                    <p class="imsg-ts">5:35 PM</p>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">U like the seasoning on your chicken?</div></div>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">It's just store baked chicken</div></div>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">I'm happy you messaged me this the accountability I need man I would have not done this if you didn't message me and kept my grounded</div></div>
+                  </div>
+                  <div class="imsg-composer" aria-hidden="true">
+                    <span class="imsg-composer-plus">+</span>
+                    <div class="imsg-composer-field">iMessage</div>
+                    <span class="imsg-composer-send">&#x2191;</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="imsg-slide" data-caption="Less friction, more confidence at the gym.">
+              <div class="imsg-scale-wrap">
+                <div class="imsg-chrome">
+                  <div class="imsg-island" aria-hidden="true"></div>
+                  <header class="imsg-header">
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
+                    </button>
+                    <div class="imsg-header-center">
+                      <div class="imsg-avatar" aria-hidden="true">C</div>
+                      <span class="imsg-name">client</span>
+                    </div>
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    </button>
+                  </header>
+                  <div class="imsg-body">
+                    <p class="imsg-ts">7:14 PM</p>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">How was the gym today</div></div>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">Thanks man. Now that I've been going for a bit, I'm more comfortable and there's much less friction to go</div></div>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">Ayeee</div></div>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">Love to hear it bro</div></div>
+                  </div>
+                  <div class="imsg-composer" aria-hidden="true">
+                    <span class="imsg-composer-plus">+</span>
+                    <div class="imsg-composer-field">iMessage</div>
+                    <span class="imsg-composer-send">&#x2191;</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="imsg-slide" data-caption="Surprising himself with consistency.">
+              <div class="imsg-scale-wrap">
+                <div class="imsg-chrome">
+                  <div class="imsg-island" aria-hidden="true"></div>
+                  <header class="imsg-header">
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
+                    </button>
+                    <div class="imsg-header-center">
+                      <div class="imsg-avatar" aria-hidden="true">C</div>
+                      <span class="imsg-name">client</span>
+                    </div>
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    </button>
+                  </header>
+                  <div class="imsg-body">
+                    <p class="imsg-ts">10:23 AM</p>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">I'm honestly surprising myself at how consistent I've been. Thanks for getting me into this lifestyle</div></div>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">Love to hear it</div></div>
+                  </div>
+                  <div class="imsg-composer" aria-hidden="true">
+                    <span class="imsg-composer-plus">+</span>
+                    <div class="imsg-composer-field">iMessage</div>
+                    <span class="imsg-composer-send">&#x2191;</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="imsg-slide" data-caption="Seeing progress in the mirror and feeling more confident.">
+              <div class="imsg-scale-wrap">
+                <div class="imsg-chrome">
+                  <div class="imsg-island" aria-hidden="true"></div>
+                  <header class="imsg-header">
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
+                    </button>
+                    <div class="imsg-header-center">
+                      <div class="imsg-avatar" aria-hidden="true">C</div>
+                      <span class="imsg-name">client</span>
+                    </div>
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    </button>
+                  </header>
+                  <div class="imsg-body">
+                    <p class="imsg-ts">11:26 AM</p>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">Man I feel so good. I think I'm seeing progress in the mirror. Also feeling more confident socially</div></div>
+                  </div>
+                  <div class="imsg-composer" aria-hidden="true">
+                    <span class="imsg-composer-plus">+</span>
+                    <div class="imsg-composer-field">iMessage</div>
+                    <span class="imsg-composer-send">&#x2191;</span>
+                  </div>
+                </div>
+              </div>
+            </article>
+
+            <article class="imsg-slide" data-caption="Huge differences already — less food noise, more confidence.">
+              <div class="imsg-scale-wrap">
+                <div class="imsg-chrome">
+                  <div class="imsg-island" aria-hidden="true"></div>
+                  <header class="imsg-header">
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15.5 19.5L8 12l7.5-7.5 1.06 1.06L10.12 12l6.44 6.44z"/></svg>
+                    </button>
+                    <div class="imsg-header-center">
+                      <div class="imsg-avatar" aria-hidden="true">C</div>
+                      <span class="imsg-name">client</span>
+                    </div>
+                    <button type="button" class="imsg-header-btn" tabindex="-1" aria-hidden="true">
+                      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 10.5V7a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1v-3.5l4 4v-11l-4 4z"/></svg>
+                    </button>
+                  </header>
+                  <div class="imsg-body">
+                    <p class="imsg-ts">1:33 PM</p>
+                    <div class="imsg-row imsg-row-in"><div class="imsg-bubble imsg-bubble-in">Love to hear it bro, how are you feeling mentally?</div></div>
+                    <div class="imsg-row imsg-row-out"><div class="imsg-bubble imsg-bubble-out">i feel good to be honest not a lot of food noise, more confident since there is wayyy less body fat on me. i'm noticing huge differences already. i really wanna start doing ab workouts at night to really push the abs since ive seen them start showing. do u recommend that?</div></div>
+                  </div>
+                  <div class="imsg-composer" aria-hidden="true">
+                    <span class="imsg-composer-plus">+</span>
+                    <div class="imsg-composer-field">iMessage</div>
+                    <span class="imsg-composer-send">&#x2191;</span>
                   </div>
                 </div>
               </div>
@@ -2168,7 +2177,6 @@
     <div class="container">
       <header class="kiru-intro-head fade-up">
         <h3>Intro — Kiru</h3>
-        <h2>From “stuck” to leading others through the process.</h2>
       </header>
       <div class="kiru-layout">
         <div class="kiru-photo-stack" id="kiru-photo-stack">
@@ -2200,19 +2208,16 @@
             <div class="kiru-timeline-line" id="kiru-timeline-line" aria-hidden="true"></div>
             <div class="kiru-timeline">
               <div class="kiru-timeline-item" data-kiru-step>
-                <div class="kiru-year">2018</div>
-                <div class="kiru-title">Started lifting seriously after years of second-guessing.</div>
-                <div class="kiru-copy">Learned how to build muscle and drop fat without living in the gym or cutting out every food I enjoyed.</div>
+                <div class="kiru-title">This isn’t about extreme diets or unrealistic routines.</div>
+                <div class="kiru-copy">It’s about building a structure that fits your lifestyle.</div>
               </div>
               <div class="kiru-timeline-item" data-kiru-step>
-                <div class="kiru-year">2021</div>
-                <div class="kiru-title">Dialed in the system I now coach.</div>
-                <div class="kiru-copy">Blended structured training, simple nutrition, and weekly check-ins so progress became predictable instead of random “good weeks.”</div>
+                <div class="kiru-title">As a South Asian, the challenge isn’t just physical.</div>
+                <div class="kiru-copy">It’s developing the mindset that allows you to stay consistent and actually enjoy the process.</div>
               </div>
               <div class="kiru-timeline-item" data-kiru-step>
-                <div class="kiru-year">TODAY</div>
-                <div class="kiru-title">Helping busy adults do the same.</div>
-                <div class="kiru-copy">Over 200+ clients coached — and the playbook I use on myself is the same one I’ll use with you.</div>
+                <div class="kiru-title">I’ve been through that myself.</div>
+                <div class="kiru-copy">This is about building habits you can rely on long-term.</div>
               </div>
             </div>
           </div>
@@ -2249,11 +2254,11 @@
         </svg>
         Instagram
       </a>
-      <a href="mailto:hello@kirucoaching.com">
+      <a href="mailto:Kiru.rasasegar@gmail.com">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
           <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
         </svg>
-        hello@kirucoaching.com
+        Kiru.rasasegar@gmail.com
       </a>
     </div>
     <p class="footer-copy">&copy; 2026 Elevated Potential Coaching. All rights reserved.</p>
@@ -2769,13 +2774,17 @@
       });
     })();
 
-    // Nav shadow on scroll
+    // Nav shadow on scroll (nav hidden on small screens via CSS)
     const nav = document.querySelector('nav');
-    window.addEventListener('scroll', () => {
-      nav.style.boxShadow = window.scrollY > 40
-        ? '0 4px 24px rgba(26,46,74,0.12)'
-        : 'none';
-    }, { passive: true });
+    window.addEventListener(
+      'scroll',
+      () => {
+        if (!nav) return;
+        nav.style.boxShadow =
+          window.scrollY > 40 ? '0 4px 24px rgba(26,46,74,0.12)' : 'none';
+      },
+      { passive: true }
+    );
   </script>
 
 </body>
