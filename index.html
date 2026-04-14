@@ -146,10 +146,45 @@
       text-transform: uppercase;
     }
 
-    /* Narrow viewports (phones, small tablets): hide fixed nav — hero “Book a call” stays primary */
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a:not(.btn) {
+      color: var(--accent);
+      opacity: 0.7;
+      text-decoration: none;
+      font-size: 0.9rem;
+    }
+
     @media (max-width: 768px) {
       nav {
-        display: none !important;
+        padding: 0.6rem var(--side);
+      }
+
+      .nav-links a:not(.btn) {
+        display: none;
+      }
+
+      .nav-links .btn {
+        padding: 0.5rem 1.1rem;
+        font-size: 0.82rem;
+      }
+
+      .nav-logo-img {
+        width: 2rem;
+        height: 2rem;
+      }
+
+      .nav-logo-text .wordmark-nav {
+        font-size: 0.72rem;
+      }
+
+      .nav-logo-text .sub {
+        font-size: 0.45rem;
       }
     }
 
@@ -524,13 +559,15 @@
       align-self: start;
       overflow: hidden;
       background: transparent;
+      aspect-ratio: 9 / 16;
     }
 
     .kiru-img-crop img {
       width: 100%;
-      height: auto;
+      height: 100%;
       display: block;
       background: transparent;
+      object-fit: cover;
     }
 
     .kiru-img-crop.is-trimmed {
@@ -1268,13 +1305,12 @@
         <span class="sub">Coaching</span>
       </span>
     </a>
-    <div style="display:flex;align-items:center;gap:1rem;flex-wrap:wrap;">
-      <a href="#client-results" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Results</a>
-      <a href="#who-help" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Who I help</a>
-      <a href="#what-you-get" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">What you get</a>
-      <a href="#video" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Video</a>
-      <a href="#testimonials" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Reviews</a>
-      <a href="#intro-kiru" style="color:var(--accent);opacity:0.7;text-decoration:none;font-size:0.9rem;">Intro</a>
+    <div class="nav-links">
+      <a href="#client-results">Results</a>
+      <a href="#who-help">Who I help</a>
+      <a href="#what-you-get">What you get</a>
+      <a href="#video">Video</a>
+      <a href="#intro-kiru">Intro</a>
       <a href="apply.html" class="btn" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">Book a call</a>
     </div>
   </nav>
@@ -1634,13 +1670,13 @@
           >
             <div class="kiru-ba-layer kiru-ba-before">
               <div class="kiru-img-crop">
-                <img src="assets/mikael-before.png" alt="Kiru — before" width="900" height="1600" loading="lazy" decoding="async" />
+                <img src="assets/mikael-after.png" alt="Kiru — before" width="900" height="1600" loading="lazy" decoding="async" style="object-fit:cover;object-position:center 15%;" />
               </div>
               <span class="kiru-photo-label">Before</span>
             </div>
             <div class="kiru-ba-layer kiru-ba-after">
               <div class="kiru-img-crop">
-                <img src="assets/mikael-after.png" alt="Kiru — after" width="900" height="1600" loading="lazy" decoding="async" />
+                <img src="assets/mikael-before.png" alt="Kiru — after" width="900" height="1600" loading="lazy" decoding="async" />
               </div>
               <span class="kiru-photo-label">After</span>
             </div>
