@@ -811,9 +811,56 @@
       flex: 0 0 auto;
       display: flex;
       flex-direction: column;
-      width: min(460px, 88vw);
+      width: min(520px, 92vw);
       overflow: hidden;
       background: #c8beac;
+    }
+
+    .results-pair {
+      display: flex;
+      flex: 1 1 auto;
+      min-height: 0;
+    }
+
+    .results-pair-half {
+      flex: 1 1 50%;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .results-pair-label {
+      position: absolute;
+      bottom: 0.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'Kanit', sans-serif;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.65rem;
+      border-radius: 4px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .results-pair-before .results-pair-label {
+      background: rgba(26, 46, 74, 0.75);
+      color: #f5f0e8;
+    }
+
+    .results-pair-after .results-pair-label {
+      background: rgba(255, 107, 43, 0.88);
+      color: #fff;
+    }
+
+    .results-pair-half .results-slide-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
     }
 
     .results-item-stack {
@@ -837,37 +884,6 @@
       background: linear-gradient(180deg, rgba(245, 240, 232, 0.97) 0%, rgba(232, 223, 201, 0.9) 100%);
     }
 
-    .results-testimonial-block {
-      padding: 3rem var(--side) 3.5rem;
-      background: var(--bg);
-      border-bottom: 1px solid rgba(26, 46, 74, 0.08);
-    }
-
-    .results-testimonial-block .container {
-      max-width: 720px;
-      text-align: center;
-    }
-
-    .results-testimonial-title {
-      font-family: 'Kanit', sans-serif;
-      font-size: clamp(1.35rem, 3.5vw, 1.85rem);
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--navy);
-      margin: 0.35rem 0 0.5rem;
-    }
-
-    .results-testimonial-lead {
-      color: var(--muted);
-      font-size: 0.95rem;
-      line-height: 1.55;
-      margin: 0 0 1.35rem;
-      max-width: 28rem;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
     .results-slide-img {
       display: block;
       width: 100%;
@@ -876,6 +892,7 @@
       object-fit: cover;
       object-position: center;
     }
+
 
     @keyframes results-marquee {
       0% { transform: translate3d(0, 0, 0); }
@@ -1317,78 +1334,185 @@
         <div class="results-track" id="results-track">
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-01.png" alt="Client transformation 1" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Leaner, stronger, and more consistent — without living in the gym.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-01-before.png" alt="Client 1 before" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-01-after.png" alt="Client 1 after" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Side profile transformation — leaner midsection and better posture.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-02.png" alt="Client transformation 2" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Visible definition and fat loss with a plan built around a busy schedule.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-02-before.png" alt="Client 2 before" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-02-after.png" alt="Client 2 after" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Back transformation — wider lats, reduced love handles.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-03.png" alt="Client transformation 3" loading="lazy" decoding="async" />
-              <p class="results-item-caption">No more "starting over every Monday" — weekly check-ins kept progress real.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-03-before.png" alt="Client 3 before" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-03-after.png" alt="Client 3 after" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Visible fat loss and improved body composition.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-04.png" alt="Client transformation 4" loading="lazy" decoding="async" />
-              <p class="results-item-caption">More energy, better lifts, and sustainable progress week after week.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-04-before.png" alt="Client 4 before" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-04-after.png" alt="Client 4 after" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Consistent training led to real, measurable change.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-05.png" alt="Client transformation 5" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Consistent coaching turns effort into visible, lasting results.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-05-before.png" alt="Client 5 before" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-05-after.png" alt="Client 5 after" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Major fat loss — the result of structure and accountability.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-06.png" alt="Client transformation 6" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Real change — posture, definition, and confidence you can see.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-06-before.png" alt="Client 6 before" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-06-after.png" alt="Client 6 after" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Leaner physique built through sustainable habits.</p>
             </div>
           </div>
           <!-- duplicate strip for infinite loop -->
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-01.png" alt="" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Leaner, stronger, and more consistent — without living in the gym.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-01-before.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-01-after.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Side profile transformation — leaner midsection and better posture.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-02.png" alt="" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Visible definition and fat loss with a plan built around a busy schedule.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-02-before.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-02-after.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Back transformation — wider lats, reduced love handles.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-03.png" alt="" loading="lazy" decoding="async" />
-              <p class="results-item-caption">No more "starting over every Monday" — weekly check-ins kept progress real.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-03-before.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-03-after.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Visible fat loss and improved body composition.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-04.png" alt="" loading="lazy" decoding="async" />
-              <p class="results-item-caption">More energy, better lifts, and sustainable progress week after week.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-04-before.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-04-after.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Consistent training led to real, measurable change.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-05.png" alt="" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Consistent coaching turns effort into visible, lasting results.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-05-before.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-05-after.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Major fat loss — the result of structure and accountability.</p>
             </div>
           </div>
           <div class="results-item">
             <div class="results-item-stack">
-              <img class="results-slide-img" src="assets/result-slide-06.png" alt="" loading="lazy" decoding="async" />
-              <p class="results-item-caption">Real change — posture, definition, and confidence you can see.</p>
+              <div class="results-pair">
+                <div class="results-pair-half results-pair-before">
+                  <img class="results-slide-img" src="assets/ba-06-before.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">Before</span>
+                </div>
+                <div class="results-pair-half results-pair-after">
+                  <img class="results-slide-img" src="assets/ba-06-after.png" alt="" loading="lazy" decoding="async" />
+                  <span class="results-pair-label">After</span>
+                </div>
+              </div>
+              <p class="results-item-caption">Leaner physique built through sustainable habits.</p>
             </div>
           </div>
-
         </div>
       </div>
     </div>
