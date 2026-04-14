@@ -255,9 +255,6 @@
   </header>
 
   <main class="wrap">
-    <div id="config-banner" class="banner warn" hidden>
-      Add your Supabase URL and anon key in <strong>js/config.js</strong> (copy from <strong>js/config.example.js</strong>), then refresh this page.
-    </div>
     <div id="msg-banner" class="banner" hidden></div>
 
     <div class="progress" aria-hidden="true"><div id="progress-fill" class="progress-fill"></div></div>
@@ -428,7 +425,10 @@
     </form>
   </main>
 
-  <script src="js/config.js"></script>
+  <script>
+    window.SUPABASE_URL = 'https://nkzdekrxgpitarjibsfs.supabase.co';
+    window.SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5remRla3J4Z3BpdGFyamlic2ZzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYxMjAwNTAsImV4cCI6MjA5MTY5NjA1MH0.kbhiXWGnYvo3WRZAsyDStfnQ8zRGRbSIgpBXrnhxQEY';
+  </script>
   <script>
     (function () {
       const TOTAL = 8;
@@ -436,20 +436,9 @@
       const panels = Array.from(form.querySelectorAll('.panel[data-step]'));
       const progressFill = document.getElementById('progress-fill');
       const stepLabel = document.getElementById('step-label');
-      const configBanner = document.getElementById('config-banner');
       const msgBanner = document.getElementById('msg-banner');
       const submitBtn = document.getElementById('submit-btn');
       const CALENDLY_BOOK_URL = 'https://calendly.com/kiru-rasasegar/45min';
-
-      function hasSupabaseConfig() {
-        const u = window.SUPABASE_URL && String(window.SUPABASE_URL).trim();
-        const k = window.SUPABASE_ANON_KEY && String(window.SUPABASE_ANON_KEY).trim();
-        return !!(u && k && !u.includes('YOUR_PROJECT') && !k.includes('YOUR_ANON'));
-      }
-
-      if (!hasSupabaseConfig()) {
-        configBanner.hidden = false;
-      }
 
       let step = 1;
 
@@ -577,10 +566,6 @@
           }
         }
 
-        if (!hasSupabaseConfig()) {
-          showBanner('err', 'Configure js/config.js with your Supabase URL and anon key first.');
-          return;
-        }
 
         const fd = new FormData(form);
         const over = fd.get('over_23');
