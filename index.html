@@ -162,11 +162,24 @@
 
     @media (max-width: 768px) {
       nav {
-        padding: 0.6rem var(--side);
+        padding: 0.55rem var(--side);
+        flex-wrap: wrap;
+        row-gap: 0.4rem;
+        align-items: center;
+      }
+
+      .nav-links {
+        flex: 1 1 auto;
+        min-width: 0;
+        justify-content: flex-end;
+        flex-wrap: wrap;
+        gap: 0.3rem 0.55rem;
+        max-width: min(100%, calc(100vw - 10.5rem));
       }
 
       .nav-links a:not(.btn) {
-        display: none;
+        font-size: 0.74rem;
+        white-space: nowrap;
       }
 
       .nav-links .btn {
@@ -589,7 +602,7 @@
       z-index: 2;
       transform: translateX(0);
       transform-origin: center center;
-      transition: transform 0.55s cubic-bezier(0.25, 0.85, 0.3, 1);
+      transition: transform 0.26s cubic-bezier(0.25, 0.85, 0.3, 1);
       will-change: transform;
     }
 
@@ -1657,6 +1670,7 @@
     <div class="container">
       <header class="kiru-intro-head fade-up">
         <h3>Intro — Kiru</h3>
+        <h2>My own before &amp; after</h2>
       </header>
       <div class="kiru-layout">
         <div class="kiru-photo-stack" id="kiru-photo-stack">
@@ -1670,13 +1684,13 @@
           >
             <div class="kiru-ba-layer kiru-ba-before">
               <div class="kiru-img-crop">
-                <img src="assets/mikael-after.png" alt="Kiru — before" width="900" height="1600" loading="lazy" decoding="async" style="object-fit:cover;object-position:center 15%;" />
+                <img src="assets/kiru-ba-before.png" alt="Kiru — before" width="900" height="1600" loading="lazy" decoding="async" />
               </div>
               <span class="kiru-photo-label">Before</span>
             </div>
             <div class="kiru-ba-layer kiru-ba-after">
               <div class="kiru-img-crop">
-                <img src="assets/mikael-before.png" alt="Kiru — after" width="900" height="1600" loading="lazy" decoding="async" />
+                <img src="assets/kiru-ba-after.png" alt="Kiru — after" width="900" height="1600" loading="lazy" decoding="async" />
               </div>
               <span class="kiru-photo-label">After</span>
             </div>
@@ -2046,7 +2060,7 @@
       });
     })();
 
-    // Nav shadow on scroll (nav hidden on small screens via CSS)
+    // Nav shadow on scroll
     const nav = document.querySelector('nav');
     window.addEventListener(
       'scroll',
