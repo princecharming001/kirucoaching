@@ -555,6 +555,78 @@
         }
       });
 
+      const QUEUE_KEY = 'epc_application_queue_v1';
+
+      function readQueue() {
+        try {
+          const raw = localStorage.getItem(QUEUE_KEY);
+          const parsed = raw ? JSON.parse(raw) : [];
+          return Array.isArray(parsed) ? parsed : [];
+        } catch (_) {
+          return [];
+        }
+      }
+
+      function writeQueue(queue) {
+        try {
+          localStorage.setItem(QUEUE_KEY, JSON.stringify(queue));
+        } catch (_) {}
+      }
+
+      function queueApplication(payload) {
+        const queue = readQueue();
+        queue.push({
+          payload,
+          queued_at: new Date().toISOString(),
+        });
+        writeQueue(queue);
+      }
+
+      async function postApplication(payload, timeoutMs) {
+        const base = window.SUPABASE_URL.trim().replace(/\/$/, '');
+        const key = window.SUPABASE_ANON_KEY.trim();
+        const controller = new AbortController();
+        const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs || 5000);
+
+        try {
+          const res = await fetch(base + '/rest/v1/applications', {
+            method: 'POST',
+            headers: {
+              apikey: key,
+              Authorization: 'Bearer ' + key,
+              'Content-Type': 'application/json',
+              Prefer: 'return=minimal',
+            },
+            body: JSON.stringify(payload),
+            signal: controller.signal,
+            keepalive: true,
+          });
+          if (!res.ok) {
+            const t = await res.text();
+            throw new Error(t || res.statusText);
+          }
+        } finally {
+          window.clearTimeout(timeoutId);
+        }
+      }
+
+      async function flushQueuedApplications() {
+        const queue = readQueue();
+        if (!queue.length) return;
+
+        const remaining = [];
+        for (const item of queue) {
+          try {
+            await postApplication(item.payload, 6000);
+          } catch (_) {
+            remaining.push(item);
+          }
+        }
+        writeQueue(remaining);
+      }
+
+      flushQueuedApplications().catch((err) => console.error('Queue flush failed:', err));
+
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
         showBanner('', '');
@@ -619,29 +691,13 @@
         submitBtn.disabled = true;
         submitBtn.textContent = 'Booking…';
 
-        const base = window.SUPABASE_URL.trim().replace(/\/$/, '');
-        const key = window.SUPABASE_ANON_KEY.trim();
-        fetch(base + '/rest/v1/applications', {
-          method: 'POST',
-          headers: {
-            apikey: key,
-            Authorization: 'Bearer ' + key,
-            'Content-Type': 'application/json',
-            Prefer: 'return=minimal',
-          },
-          body: JSON.stringify(payload),
-          keepalive: true,
-        })
-          .then(async (res) => {
-            if (!res.ok) {
-              const t = await res.text();
-              throw new Error(t || res.statusText);
-            }
-          })
-          .catch((err) => {
-            // Do not block booking flow if Supabase is temporarily unavailable.
-            console.error('Application save failed:', err);
-          });
+        try {
+          await postApplication(payload, 3500);
+        } catch (err) {
+          // Never block booking. Queue and retry on the next visit if submit fails now.
+          console.error('Application save failed, queued for retry:', err);
+          queueApplication(payload);
+        }
 
         const calendly = new URL(CALENDLY_BOOK_URL);
         if (payload.first_name) calendly.searchParams.set('first_name', payload.first_name);
