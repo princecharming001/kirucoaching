@@ -1,5 +1,10 @@
 # Supabase CLI — https://supabase.com/docs/guides/cli/config
 # Edge Function: notify-application (email Kiru on new applications)
+#
+# Project ref (Dashboard → Settings → General): nkzdekrxgpitarjibsfs
+# Link locally: npx supabase link --project-ref nkzdekrxgpitarjibsfs
+
+project_id = "nkzdekrxgpitarjibsfs"
 
 [functions.notify-application]
 verify_jwt = false
