@@ -621,33 +621,27 @@
 
         const base = window.SUPABASE_URL.trim().replace(/\/$/, '');
         const key = window.SUPABASE_ANON_KEY.trim();
-        let submitErr = null;
-        try {
-          const res = await fetch(base + '/rest/v1/applications', {
-            method: 'POST',
-            headers: {
-              apikey: key,
-              Authorization: 'Bearer ' + key,
-              'Content-Type': 'application/json',
-              Prefer: 'return=minimal',
-            },
-            body: JSON.stringify(payload),
+        fetch(base + '/rest/v1/applications', {
+          method: 'POST',
+          headers: {
+            apikey: key,
+            Authorization: 'Bearer ' + key,
+            'Content-Type': 'application/json',
+            Prefer: 'return=minimal',
+          },
+          body: JSON.stringify(payload),
+          keepalive: true,
+        })
+          .then(async (res) => {
+            if (!res.ok) {
+              const t = await res.text();
+              throw new Error(t || res.statusText);
+            }
+          })
+          .catch((err) => {
+            // Do not block booking flow if Supabase is temporarily unavailable.
+            console.error('Application save failed:', err);
           });
-          if (!res.ok) {
-            const t = await res.text();
-            submitErr = new Error(t || res.statusText);
-          }
-        } catch (err) {
-          submitErr = err;
-        }
-
-        if (submitErr) {
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Book my call';
-          console.error(submitErr);
-          showBanner('err', submitErr.message || 'Something went wrong. Check Supabase RLS and that your table matches the expected columns.');
-          return;
-        }
 
         const calendly = new URL(CALENDLY_BOOK_URL);
         if (payload.first_name) calendly.searchParams.set('first_name', payload.first_name);
@@ -655,7 +649,7 @@
         if (payload.email) calendly.searchParams.set('email', payload.email);
 
         submitBtn.textContent = 'Opening Calendly…';
-        showBanner('ok', 'Saved — taking you to pick a time.');
+        showBanner('ok', 'Taking you to pick a time.');
         window.location.assign(calendly.toString());
       });
 
